@@ -12,6 +12,8 @@ import {NewProblemComponent} from './components/new-problem/new-problem.componen
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {FormsModule} from '@angular/forms';
 
+import { HttpModule } from "@angular/http";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +25,8 @@ import {FormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
-    routing
+    routing,
+    HttpModule
   ],
   providers: [
     {

@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Problem } from 'app/data-structure/problem';
+//import { Subscription }from 'rxis/Subscription';
 
 @Component({
   selector: 'app-problem-list',
@@ -8,12 +9,13 @@ import { Problem } from 'app/data-structure/problem';
 })
 export class ProblemListComponent implements OnInit {
 
-  problems: Problem[];
-
+  problems: Problem[] = [];
+  //subscriptionProblems: Subscription;
   constructor(@Inject('data') private dataService) { }
 
   ngOnInit() {
-    this.problems = this.dataService.getProblems();
+    this.dataService.getProblems()
+      .subscribe(problems => this.problems = problems );
   }
 
 }
