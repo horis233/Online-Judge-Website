@@ -1,0 +1,36 @@
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
+    <li><a data-toggle="tab" href="#password">Change Password</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="profile" class="tab-pane fade in active">
+      <h3>Profile</h3>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <p>{{ profile?.nickname }}</p>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <p>{{ profile?.name }}</p>
+      </div>
+
+      <div class="form-group">
+        <label for="login">Last Login</label>
+        <p>{{ profile?.updated_at}}</p>
+      </div>
+
+    </div>
+
+    <div id="password" class="tab-pane fade">
+      <h3>Change Password</h3>
+      <div class="nav-form">
+        <button type="button" class="btn btn-large btn-success">Reset password via Email</button>
+      </div>
+    </div>
+
+  </div>
+</div>

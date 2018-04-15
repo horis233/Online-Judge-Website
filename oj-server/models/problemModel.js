@@ -5,6 +5,7 @@ var ProblemSchema = mongoose.Schema({
   desc: String,
   difficulty: String
 });
-var problemModel = mongoose.model("problemModel", ProblemSchema);
 
-module.exports = problemModel;
+var ProblemModel = mongoose.model('ProblemModel', ProblemSchema);
+
+module.exports = ProblemModel;

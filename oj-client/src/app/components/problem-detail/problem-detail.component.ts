@@ -1,28 +1,26 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Problem } from 'app/data-structure/problem';
-
+import { ActivatedRoute } from '@angular/router';
+import { Problem } from '../../models/problem.model';
 
 @Component({
   selector: 'app-problem-detail',
   templateUrl: './problem-detail.component.html',
   styleUrls: ['./problem-detail.component.css']
 })
-export class ProblemDetailComponent implements OnInit {
 
+export class ProblemDetailComponent implements OnInit {
   problem: Problem;
 
   constructor(
-    private route: ActivatedRoute,
-    @Inject('data') private dataService
+    @Inject('data') private dataService,
+    private route:ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      //this.problem = this.dataService.getProblem(+params['id']);
+    this.route.params.subscribe(params => {
       this.dataService.getProblem(+params['id'])
-        .then(problem => this.problem = problem);
-    });
+                      .then( problem => this.problem = problem );
+    })
   }
 
 }

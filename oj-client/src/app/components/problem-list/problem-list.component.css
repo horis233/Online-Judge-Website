@@ -1,6 +1,16 @@
+body {
+  padding-top: 5rem;
+}
+
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
 .difficulty {
   min-width: 65px;
   margin-right: 10px;
+  /*text-transform: capitalize;*/
 }
 
 .label.difficulty {
@@ -11,20 +21,21 @@
 
 .title {
   font-size: 1.2em;
+  /*text-transform: capitalize;*/
 }
 
 .diff-easy {
-  background-color: #42ebf4;
+  background-color: #b2cfc8;
 }
 
 .diff-medium {
-  background-color: #92cf5c;
+  background-color: #bbbdb9;
 }
 
 .diff-hard {
-  background-color: #dd0d1e;
+  background-color: #a6b3b0;
 }
 
 .diff-super {
-  background-color: #8d16e2;
+  background-color: #5b6663;
 }

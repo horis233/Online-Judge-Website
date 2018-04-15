@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "../public",
+      "outDir": "../production",
       "assets": [
         "assets",
         "favicon.ico"
@@ -20,7 +20,7 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
