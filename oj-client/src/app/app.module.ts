@@ -16,6 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import {FormsModule} from '@angular/forms';
 
 import { HttpModule } from "@angular/http";
+import { CallbackComponent } from './components/callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HttpModule } from "@angular/http";
     ProblemDetailComponent,
     NewProblemComponent,
     NavbarComponent,
-    ProfileComponent
+    ProfileComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,

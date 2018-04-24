@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/toPromise';
 import * as auth0 from 'auth0-js';
 
 @Injectable()
@@ -17,9 +19,9 @@ export class AuthService {
     scope: 'openid profile'
   });
 
-  constructor(public router: Router) {}
+  constructor(public router: Router,private http: Http) {}
 
-  public login(): void {
+  public login(){
     this.auth0.authorize();
   }
 
@@ -74,5 +76,30 @@ export class AuthService {
       cb(err, profile);
     });
   }
+
+  public resetPassword(): void {
+    this.getProfile((err, profile) => {
+      this.userProfile = profile;
+    });
+    let profile = this.userProfile;
+    let url: string = `https://${this.auth0.domain}/dbconnections/change_password`;
+    let headers = new Headers({ 'content-type': 'application/json' });
+    let body = { client_id: '8ISBVQwZmgTAz_FaNa_yT19ufKDN7bU4',
+     email: profile.email,
+     connection: 'Username-Password-Authentication'
+   }
+
+    this.http.post(url, body, headers)
+      .toPromise()
+      .then((res: Response) => {
+        console.log(res.json());
+      })
+      .catch(this.handleError);
+  }
+  private handleError (error : any): Promise<any> {
+    console.log("error occurred", error);
+    return Promise.reject(error.message || error);
+  }
+
 
 }
