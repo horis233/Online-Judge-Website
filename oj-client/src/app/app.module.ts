@@ -7,15 +7,15 @@ import { ProblemDetailComponent } from './components/problem-detail/problem-deta
 
 import { DataService } from 'app/services/data.service';
 import { AuthService } from 'app/services/auth.service';
-import { AuthGuardService } from './services/auth-guard.service';
 
 import { routing } from 'app/app.routes';
-import {NewProblemComponent} from './components/new-problem/new-problem.component';
-import {NavbarComponent} from './components/navbar/navbar.component';
+import { NewProblemComponent } from './components/new-problem/new-problem.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProfileComponent } from './components/profile/profile.component';
+
 import {FormsModule} from '@angular/forms';
 
 import { HttpModule } from "@angular/http";
-import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -39,10 +39,6 @@ import { ProfileComponent } from './components/profile/profile.component';
     },{
       provide:'auth',
       useClass: AuthService
-    },
-    {
-      provide: 'authGuard',
-      useClass: AuthGuardService
     }
   ],
   bootstrap: [AppComponent]

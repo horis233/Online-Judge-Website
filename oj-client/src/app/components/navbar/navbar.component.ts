@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ProfileComponent } from '../profile/profile.component';
+//import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',

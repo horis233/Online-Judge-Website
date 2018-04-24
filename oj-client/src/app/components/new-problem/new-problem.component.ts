@@ -20,7 +20,6 @@ export class NewProblemComponent implements OnInit {
 
   constructor(
     @Inject('data') private dataService,
-    @Inject('authGuard') private authGuardService
   ) { }
 
   addProblem() : void {
