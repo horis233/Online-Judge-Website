@@ -44,6 +44,7 @@ export class AuthService {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    localStorage.setItem('profile', JSON.stringify(authResult.profile));
   }
 
   public logout(): void {
@@ -51,6 +52,7 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('profile');
     // Go back to the home route
     this.router.navigate(['/']);
   }
@@ -76,6 +78,10 @@ export class AuthService {
       cb(err, profile);
     });
   }
+
+  public returnProfile(): Object {
+  return JSON.parse(localStorage.getItem('profile'));
+}
 
   public resetPassword(): void {
     this.getProfile((err, profile) => {
