@@ -2,19 +2,23 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 declare var ace: any;
+
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent implements OnInit {
+
   editor: any;
+
   language: string = 'Java';
+
   languages: string[] = ['Java', 'C++', 'Python'];
   sessionId: string;
   defaultContent = {
     'Java': `public class Example {
-public static void main(String[] args) { 
+public static void main(String[] args) {
     // Type your Java code here
     }
 }`,
@@ -36,13 +40,17 @@ int main() {
       // this.problem = this.data.getProblem(+params['id']);
       this.sessionId = params['id'];
       this.initEditor();
+      this.collaboration.restoreBuffer();
     });
   }
 
   initEditor(): void {
+
     this.editor = ace.edit('editor');
-    this.editor.setTheme('ace/theme/eclipse');
+    this.editor.setTheme("ace/theme/dracula");
+    document.getElementsByTagName('textarea')[0].focus();
     this.editor.setFontSize(18);
+    this.resetEditor();
 
     this.editor.$blockScrolling = Infinity;
 

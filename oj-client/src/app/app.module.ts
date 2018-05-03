@@ -43,8 +43,8 @@ import { CollaborationService } from './services/collaboration.service';
       provide:'auth',
       useClass: AuthService
     },{
-    provide: 'collaboration',
-    useClass: CollaborationService
+      provide: 'collaboration',
+      useClass: CollaborationService
   }
   ],
   bootstrap: [AppComponent]

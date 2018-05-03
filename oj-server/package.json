@@ -7,11 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
-  "author": "Qianjun Gan",
+  "author": "Horis Hu",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "mongoose": "^4.9.8"
+    "mongoose": "^4.9.8",
+    "redis": "^2.8.0",
+    "socket.io": "^2.1.0"
   }
 }
