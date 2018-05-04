@@ -41,7 +41,7 @@ export class CollaborationService {
         css.type = "text/css";
         css.innerHTML = ".editor_cursor_" + changeClientId
             + " { position:absolute; background:" + COLORS[this.clientNum] + ";"
-            + " z-index: 100; width:3px !important; }";
+            + " z-index: 100; width:2px !important; }";
         document.body.appendChild(css);
         this.clientNum++;
       }

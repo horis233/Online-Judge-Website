@@ -10,12 +10,17 @@ import { Problem } from '../../models/problem.model';
 
 export class ProblemListComponent implements OnInit {
   problems: Problem[];
+  searchTerm: string = '';
   problemsSubscription: Subscription;
+  subscriptionInput: Subscription;
 
-  constructor(@Inject('data') private dataService) { }
+
+  constructor(@Inject('data') private dataService,
+              @Inject("input") private input) { }
 
   ngOnInit() {
     this.getProblems();
+    this.getSearchTerm();
   }
 
   getProblems(): void{
@@ -23,6 +28,12 @@ export class ProblemListComponent implements OnInit {
       this.dataService.getProblems().subscribe(
         problems => this.problems = problems
       );
+  }
+
+  getSearchTerm(): void {
+    this.subscriptionInput = this.input.getInput().subscribe(
+      inputTerm => { this.searchTerm = inputTerm; }
+    )
   }
 
   ngOnDestroy() {

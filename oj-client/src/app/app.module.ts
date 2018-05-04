@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from "@angular/http";
 
 import { routing } from 'app/app.routes';
@@ -13,10 +14,12 @@ import { EditorComponent } from './components/editor/editor.component';
 import { NewProblemComponent } from './components/new-problem/new-problem.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 import { DataService } from 'app/services/data.service';
 import { AuthService } from 'app/services/auth.service';
 import { CollaborationService } from './services/collaboration.service';
+import { InputService } from './services/input.service';
 
 @NgModule({
   declarations: [
@@ -27,25 +30,33 @@ import { CollaborationService } from './services/collaboration.service';
     NavbarComponent,
     ProfileComponent,
     CallbackComponent,
-    EditorComponent
+    EditorComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     routing,
-    HttpModule
+    HttpModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {
       provide: 'data',
       useClass: DataService
-    },{
+    },
+    {
       provide:'auth',
       useClass: AuthService
-    },{
+    },
+    {
       provide: 'collaboration',
       useClass: CollaborationService
-  }
+    },
+    {
+      provide: "input",
+      useClass: InputService
+    }
   ],
   bootstrap: [AppComponent]
 })
