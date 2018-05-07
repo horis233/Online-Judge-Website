@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { DataService } from './../../services/data.service';
+
 
 declare var ace: any;
 
@@ -14,7 +16,7 @@ export class EditorComponent implements OnInit {
 
   language: string = 'Java';
 
-  languages: string[] = ['Java', 'C++', 'Python'];
+  languages: string[] = ['Java', 'Python'];
   sessionId: string;
   defaultContent = {
     'Java': `public class Example {
@@ -22,18 +24,14 @@ public static void main(String[] args) {
     // Type your Java code here
     }
 }`,
-    'C++': `#include <iostream>
-using namespace std;
-int main() {
-  // Type your C++ code here
-  return 0;
-}`,
     'Python': `class Solution:
    def example():
        # Write your Python code here`
   }
+  output: string = '';
   constructor(@Inject('collaboration') private collaboration,
-              private route: ActivatedRoute) { }
+              @Inject('data') private dataService,
+              private route: ActivatedRoute,) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -95,5 +93,12 @@ int main() {
   submit() {
     let userCodes = this.editor.getValue();
     console.log('submit....' + userCodes);
+    const data = {
+      userCodes: userCodes,
+      lang: this.language.toLocaleLowerCase()
+    };
+
+    this.dataService.buildAndRun(data)
+      .then(res => this.output = res.text);
   }
 }

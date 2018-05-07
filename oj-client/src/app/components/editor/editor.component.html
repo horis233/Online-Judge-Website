@@ -24,7 +24,7 @@
             </button>
           </div>
           <div class="modal-body">
-            Are you sure? Are you okay?
+              You will lose current code in the window, are you sure?
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal"
@@ -37,10 +37,13 @@
   </header>
 <br>
   <div class="row">
-    <div id="editor">
+    <div id="editor"></div>
+    <div>
+        {{output}}
     </div>
   </div>
-  <footer>
+  <br>
+  <footer class="editor-footer">
     <button type="button" class="btn btn-success pull-right" (click)="submit()">
       Submit Solution
     </button>
