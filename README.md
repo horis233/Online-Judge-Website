@@ -1,10 +1,8 @@
 # COJ_project
 
-- [Demo](http://ec2-18-221-10-155.us-east-2.compute.amazonaws.com:3000/problems)
-
 ## How build the both client and server sides for this App
 ```
-╔══════════════════════╗        ╔═══════════╗ 
+╔══════════════════════╗        ╔═══════════╗
 ║ App.component.html.ts║-------➡║ index.html║-------
 ╚══════════════════════╝        ╚═══════════╝       |
     ↗         ↖                                     |
@@ -29,18 +27,18 @@
     ↓↑               ╚═══════════╝ ↖ ║ Server.js ║
     ↓↑                               ╚═══════════╝
     ↓↑                                     ║
-╔══════════════╗      ╔══════════╗ connect ║ 
-║ ProblemModel ║  ←←← ║ MongoDB  ║ ════════╝ 
+╔══════════════╗      ╔══════════╗ connect ║
+║ ProblemModel ║  ←←← ║ MongoDB  ║ ════════╝
 ╚══════════════╝      ╚══════════╝
 ```
 ***
 ## How a request was sent from frontend to backend and back to browser
 
-- DataService(FrontEnd) call a Http Request 
+- DataService(FrontEnd) call a Http Request
 - for example getProblems()
-- api Request send to server.js 
+- api Request send to server.js
 - Server.js send request to RestRouter to find a right ProblemService
-- Problem help to get data from ProblemSchema 
+- Problem help to get data from ProblemSchema
 - ProblemModel search the data from Database and send back to RestRouter
 - RestRouter get the problems data and chagne it to a JSON file
 - Send it back to DataService
@@ -53,7 +51,7 @@
 ***
 ## Document Introduction
 
-### e2e / karma.conf.js / protractor.cong.js 
+### e2e / karma.conf.js / protractor.cong.js
 ```
 For testing
 ```
@@ -63,7 +61,7 @@ For testing
 Made by npm, then, npm will install libraries by package.json file
 ```
 
-### gitignore 
+### gitignore
 ```
 Marked documents don't need to be uploaed eg. dependencies/node_module
 ```
@@ -76,12 +74,12 @@ Marked documents don't need to be uploaed eg. dependencies/node_module
 ## src
 ### Template(VIEW)
 ```
-Composing HTML templates with Angularized markup 
+Composing HTML templates with Angularized markup
 ```
 ### Component(Model)
 ```
 Classes to manage or support the templates.
-Interacting with the VIEW through an API of properites and methods. 
+Interacting with the VIEW through an API of properites and methods.
 ```
 - selector : How to show the page in index.html <app-root>
 
@@ -124,7 +122,7 @@ Boxing components and services. (收納箱)
 ## Client (Data will connect with a fake)
 
 ```
-╔  Router: app.routes.ts 
+╔  Router: app.routes.ts
 ║      ↓
 ║      ↓       ╔ Problem-list
 ╟ Conponents ══╟ Problem-detail
@@ -134,8 +132,8 @@ Boxing components and services. (收納箱)
 ╚  Data Service ←  ↙          
 ```
 - Made a dir. components in src/app/
-- Used ag-cli automatically create four files 
-- and add ProblemListComponent in app.module.ts 
+- Used ag-cli automatically create four files
+- and add ProblemListComponent in app.module.ts
 
 ```md
 $mkdir components
@@ -143,7 +141,7 @@ $ng g c problem-list
 ```
 ***
 ## Add Bootstrap
-- install bootstrap & jQuery package from npm 
+- install bootstrap & jQuery package from npm
 - Since we don't use all bootstrap module, suggest to use from npm
 ```
 npm install bootstrap --save
@@ -167,11 +165,11 @@ npm install jquery --save
 
 ### In problem-list.component.ts
 ```
-Use tag <app-problem-list> made by Angular in "app.component.html.ts" 
+Use tag <app-problem-list> made by Angular in "app.component.html.ts"
 could show the content from "problem-list.component.html"  
 ```
 ```
-index.html(<app-root>) <- 
+index.html(<app-root>) <-
 app.component.html.ts(<app-problem-list>) <-
 problem-list.component.html.ts
 ```
@@ -195,7 +193,7 @@ export class Problem{
     diff: string;
 }
 ```
-### Create a mock data 
+### Create a mock data
 - In problem-list component, we need to import the model and create a variable with mock datas
 
 ```ts
@@ -222,7 +220,7 @@ const PROBLEMS: Problem[] = [
 ```ts
 export class ProblemListComponent implements OnInit {
   problems = []; // give a list
-  
+
   constructor() { }
 
   ngOnInit() {
@@ -322,14 +320,14 @@ import {DataService} from '../../services/data.service';
     this.problems = this.dataService.getProblems();
 ```
 
-*** 
+***
 ## Problem Detail Component
 ```
 ng g c problem-detail
 ```
-*** 
+***
 ### Single page app Routing
-- Client side routing is the same as server side routing, 
+- Client side routing is the same as server side routing,
 - but it's ran in the browser
 ### Add app.routes.ts
 ```
@@ -425,7 +423,7 @@ export class SummaryPipe implements PipeTransform {
 <div class="list-group-item description "> {{problem.desc | summary}}</div>
 ```
 
-*** 
+***
 ## Problem Detail Component
 - Import Probelm from model
 ```ts
@@ -474,7 +472,7 @@ $ ng g c new-problem
   ],
 ```
 
-- HTML markup for New Problem Form 
+- HTML markup for New Problem Form
 - [()]: "Banana in the Box" for TWO-WAY data binding
 * []: Property Binding (One-Way)
 * (): Event Binding (One-Way)
@@ -485,9 +483,9 @@ $ ng g c new-problem
   <form #formRef = "ngForm">
     <div class="form-group">
       <label for="problemName">Problem Name</label>
-      <input name="problemName" id="problemName" 
-      class="form-control" type="text" required 
-      placeholder="Please Enter Problem Name" 
+      <input name="problemName" id="problemName"
+      class="form-control" type="text" required
+      placeholder="Please Enter Problem Name"
       [(ngModel)]="newProblem.name">
     </div>
     <div></div>
@@ -515,9 +513,9 @@ $ ng g c new-problem
 ```html
       <div class="form-group">
           <label for="problemDesc">Problem Description</label>
-          <textarea name="problemDesc" id="problemDesc" 
-          class="form-control" required 
-          placeholder="Please Enter Problem Description" 
+          <textarea name="problemDesc" id="problemDesc"
+          class="form-control" required
+          placeholder="Please Enter Problem Description"
           [(ngModel)]="newProblem.desc" rows="3">
           </textarea>
       </div>
@@ -606,7 +604,7 @@ ng g c navbar
 - Copy navbar codes from bootstrap
 ```html
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container"> 
+    <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
@@ -618,7 +616,7 @@ ng g c navbar
 ```
 npm install --save font-awesome
 ```
-- Add font-awesome stylesheet in ".angular-cli.json" 
+- Add font-awesome stylesheet in ".angular-cli.json"
 ```ts
 "../node_modules/font-awesome/css/font-awesome.css"
 ```
@@ -874,7 +872,7 @@ const addProblem = function(newProblem){
         "desc": "Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.",
         "difficulty": "medium"
 }
-``` 
+```
 
 * Post a right request will respone right messages with new id
 ```js
@@ -982,7 +980,7 @@ const getProblem = function(id){
 const addProblem = function(newProblem){
     return new Promise((resolve, reject) => {
         ProblemModel.findOne({name: newProblem.name}, (err, data) => {
-            if (data) { 
+            if (data) {
                 // find a same id
                 reject('Problem already exists!');
             } else {
@@ -1000,10 +998,10 @@ const addProblem = function(newProblem){
 ```
 ***
 
-## Connect 
+## Connect
 
 ### STEP 1  
-- Refactor client-side data.service to async 
+- Refactor client-side data.service to async
 - in app.module.ts
 - import HttpClientModule
 
@@ -1013,10 +1011,10 @@ const addProblem = function(newProblem){
 - Problem-detail.component.ts
 - New-Problem.component.ts
 
-### STEP 3 
+### STEP 3
 - Update .angualr-cli.json, change location of ourDir
 - In the future, you can use ng build -- watch in/ oj-client, we are not using localhost:4200 anymore
-- 
+-
 ### STEP 4
 - Send static web pages from server to browser
 
@@ -1040,7 +1038,7 @@ import { HttpClientModule } from '@angular/common/http';
 ```
 - Import HttpClient, HttpHeaders, HttpResponse:
 
-- Observable: Observe Data Flow. Non-stop sending data, with Values, Complete, Error. 
+- Observable: Observe Data Flow. Non-stop sending data, with Values, Complete, Error.
 
 - BehaviorSubject: Always exist.
 
@@ -1140,7 +1138,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 ```
 
-- subscription 
+- subscription
 ```ts
 subscriptionProblems: Subscription;
 ```
@@ -1256,7 +1254,7 @@ app.use((req, res) => {
 
 - [ACE](https://ace.c9.io/#nav=api&api=editor)
 
-- [Socket.io](https://socket.io/docs/) 
+- [Socket.io](https://socket.io/docs/)
 
 - [Socket.io client](https://socket.io/docs/client-api/)
 
@@ -1429,7 +1427,7 @@ defaultContent = {
 - Submit button
 ```html
 <footer class="editor-footer">
-    <button type="button" class="btn btn-success pull-right" 
+    <button type="button" class="btn btn-success pull-right"
     (click)="submit()">Submit Solution</button>
 </footer>
 </section>
@@ -1595,11 +1593,11 @@ export class EditorComponent implements OnInit {
   constructor( private collaboration: CollaborationService,
   private route: ActivatedRoute) { }
 
-  
+
 ```
 - In ngOnInit, get id first by route params senging into "sessionId" and call initEditor (Make those methods a function)
 
-- Send editor and session id when using clollaboration init 
+- Send editor and session id when using clollaboration init
 
 - collaboration.init(this.editor, this.sessionId)
 
@@ -1625,7 +1623,7 @@ initEditor(){
     // set up collaboration secket
     this.collaboration.init(this.editor, this.sessionId);
     this.editor.lastAppliedChange = null;
-    
+
     // register changne callback
     this.editor.on('change', (e) => {
       console.log('editor change' + JSON.stringify(e));
@@ -1714,7 +1712,7 @@ module.exports = function(io){
   });
 ```
 
-## Store and restore socket session with Redis 
+## Store and restore socket session with Redis
 
 - collaboration service, when user
 - 從connection的時候就先去collaborations看有沒有這個sessionId
@@ -1958,7 +1956,7 @@ buildAndRun(data): Promise<any> {
   }
 ```
 
-- Import DataService in editor component and send out the userCodes and language data 
+- Import DataService in editor component and send out the userCodes and language data
 - Also add in constructor
 - data as a JSON object sent to server side
 ```ts
@@ -1968,7 +1966,7 @@ buildAndRun(data): Promise<any> {
       userCodes: userCodes,
       lang: this.language.toLocaleLowerCase()
     };
-  
+
     this.dataService.buildAndRun(data)
       .then(res => this.output = res.text);
   }
@@ -2213,7 +2211,7 @@ def build_and_run(code, lang):
     source_file_host_dir = "%s/%s" % (TEMP_BUILD_DIR, source_file_parent_dir_name)
     source_file_guest_dir = "/test/%s" % (source_file_parent_dir_name)
     make_dir(source_file_host_dir)
-    
+
     with open("%s/%s" %(source_file_host_dir, SOURCE_FILE_NAMES[lang]), 'w') as source_file:
         source_file.write(code)
     try:
@@ -2247,7 +2245,7 @@ def build_and_run(code, lang):
 ```
 
 - For executor_server
-* Import executor_utils 
+* Import executor_utils
 ```py
 import executor_utils as eu
 ```
@@ -2348,7 +2346,7 @@ redis-server
 
 - Docker
 ```
-sudo ducker run weichienhsu/coj-project
+sudo ducker run horis233/coj-project
 ```
 
 ## Developer:
