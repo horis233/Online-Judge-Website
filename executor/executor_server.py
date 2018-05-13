@@ -1,4 +1,5 @@
 import json
+import sys
 from flask import Flask
 app = Flask(__name__)
 from flask import jsonify
@@ -23,4 +24,5 @@ def build_and_run():
 
 if __name__ == '__main__':
     eu.load_image()
-    app.run(debug=True, threaded = True)
+    port = int(sys.argv[1])
+    app.run(threaded = True, port = port)
