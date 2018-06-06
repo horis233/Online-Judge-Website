@@ -3,9 +3,9 @@
 ## How build the both client and server sides for this App
 ```
 ╔══════════════════════╗        ╔═══════════╗
-║ App.component.html.ts║-------➡║ index.html║-------
+║ App.component.html.ts║------➡║ index.html║-------
 ╚══════════════════════╝        ╚═══════════╝       |
-    ↗         ↖                                     |
+    ↗         ↖                                   |
 ╔════════╗   ╔════════╗                             |
 ║ Navbar ║   ║ Router ║                             |
 ╚════════╝   ╚════════╝                             |
@@ -13,9 +13,9 @@
 ╔══════════════════════╗ ╔═══════════════════════╗  |
 ║ ProblemListCompinent ║ ║ ProblemDetailComponent║  |
 ╚══════════════════════╝ ╚═══════════════════════╝  |
-        ↗                ↘      ↓ onInit function   |
+        ↗                ↘      ↓ onInit function |
 ╔══════════════════════╗   ╔════════════╗           |
-║  NewProblemCompinent ║ ➡ ║ DataService║           |
+║  NewProblemCompinent ║ ➡║ DataService║           |
 ╚══════════════════════╝   ╚════════════╝           |
               (api Request)  ↑  ↓           ╔═══════════╗
 -----------------------------↑  ↓ --------  ║public/    ║
