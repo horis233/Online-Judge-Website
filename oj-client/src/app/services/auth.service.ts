@@ -16,7 +16,7 @@ export class AuthService {
     responseType: 'token id_token',
     audience: 'https://horis.auth0.com/userinfo',
     redirectUri: 'http://localhost:3000',
-    scope: 'openid profile'
+    scope: 'openid profile email'
   });
 
   constructor(public router: Router,private http: Http) {}
@@ -80,8 +80,8 @@ export class AuthService {
   }
 
   public returnProfile(): Object {
-  return JSON.parse(localStorage.getItem('profile'));
-}
+    return JSON.parse(localStorage.getItem('profile'));
+  }
 
   public resetPassword(): void {
     this.getProfile((err, profile) => {
@@ -102,6 +102,15 @@ export class AuthService {
       })
       .catch(this.handleError);
   }
+
+  public isAdmin(): boolean {
+    if (this.isAuthenticated() && this.userProfile.nickname.includes('admin')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   private handleError (error : any): Promise<any> {
     console.log("error occurred", error);
     return Promise.reject(error.message || error);
