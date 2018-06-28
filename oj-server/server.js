@@ -37,6 +37,8 @@ function onError(error){
     throw error;
 }
 
-function onListening(){
-    console.log('App listening on port 3000')
+function onListening() {
+  const address = server.address();
+  const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + address.port;
+  console.log('Listening on ' + bind);
 }
