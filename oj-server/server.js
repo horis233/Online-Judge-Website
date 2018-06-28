@@ -6,7 +6,7 @@ const io = socketIO();
 const editorSocketService = require('./services/editorSocketService')(io);
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://admin:admin@ds133249.mlab.com:33249/coj-ganqianjun');
+mongoose.connect('mongodb://horis233:horis233@ds241059.mlab.com:41059/horis-coj');
 
 var restRouter = require('./routes/rest.js');
 var indexRouter = require('./routes/index.js');

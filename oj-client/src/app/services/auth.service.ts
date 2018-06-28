@@ -15,7 +15,7 @@ export class AuthService {
     domain: 'horis.auth0.com',
     responseType: 'token id_token',
     audience: 'https://horis.auth0.com/userinfo',
-    redirectUri: 'http://localhost:3000',
+    redirectUri: 'http://52.87.237.217:3000',
     scope: 'openid profile email'
   });
 
