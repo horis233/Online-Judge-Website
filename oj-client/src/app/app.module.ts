@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from "@angular/http";
 import { HttpClientModule } from '@angular/common/http';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { routing } from 'app/app.routes';
 
@@ -48,7 +47,6 @@ import { InputService } from './services/input.service';
     HttpModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
   ],
   providers: [
     {
@@ -72,7 +70,6 @@ import { InputService } from './services/input.service';
       useClass: InputService
     }
   ],
-  bootstrap: [AppComponent],
-  schemas: [ NO_ERRORS_SCHEMA ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

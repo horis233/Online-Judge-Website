@@ -10,6 +10,7 @@ npm install
 ng build --watch &
 
 cd ../oj-server
+npm install
 nodemon server.js &
 
 cd ../executor

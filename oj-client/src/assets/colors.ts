@@ -1,4 +1,4 @@
-export const COLORS: [string] = [
+export const COLORS: Array<String> = [
   "#0000ff",
   "#a52a2a",
   "#00ffff",

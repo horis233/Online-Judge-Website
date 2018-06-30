@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs/Rx';
-import { Http, Response, Headers} from '@angular/http';
+import { Http, Response } from '@angular/http';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import 'rxjs/add/operator/toPromise';
 import { Problem } from '../models/problem.model';
 
@@ -9,7 +10,7 @@ export class DataService {
 
   private _problemSource = new BehaviorSubject<Problem[]>([]);
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   getProblems(): Observable<Problem[]> {
     this.http.get('api/v1/problems')
@@ -29,10 +30,12 @@ export class DataService {
   }
 
   addProblem(newProblem: Problem) {
-    const headers = new Headers ({
-      'content-type': 'application/json'
-    });
-    return this.http.post('api/v1/problems', newProblem, headers)
+    const httpOptions = {
+       headers: new HttpHeaders({
+       'Content-Type':  'application/json',
+      })
+    };
+    return this.http.post('api/v1/problems', newProblem, httpOptions)
                     .toPromise()
                     .then( (res: Response) => {
                       // call 'getProblems' to let the new problem display
@@ -43,8 +46,12 @@ export class DataService {
   }
 
   buildAndRun(data): Promise<Object>{
-    let headers = new Headers({'content-type': 'application/json'});
-    return this.http.post('api/v1/build_and_run',data,headers)
+    const httpOptions = {
+       headers: new HttpHeaders({
+       'Content-Type':  'application/json',
+      })
+    };
+    return this.http.post('api/v1/build_and_run',data,httpOptions)
       .toPromise()
       .then((res: Response) => {
         console.log("data service");
