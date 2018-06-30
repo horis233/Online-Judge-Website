@@ -138,6 +138,7 @@ var ProfileComponent = (function () {
         this.auth = auth;
         this.email = '';
         this.username = '';
+        this.login_time = '';
     }
     ProfileComponent.prototype.ngOnInit = function () {
         if (this.auth.userProfile) {
@@ -148,6 +149,7 @@ var ProfileComponent = (function () {
         }
         this.email = this.profile.email;
         this.username = this.profile.nickname;
+        this.login_time = this.profile.updated_at;
     };
     ProfileComponent.prototype.resetPassword = function () {
         this.auth.resetPassword();
@@ -204,9 +206,10 @@ var AuthGuardService = (function () {
         }
     };
     AuthGuardService.prototype.isAdmin = function () {
-        if (this.auth.isAuthenticated()
-            && this.auth.getProfile()['http://getRoles/roles'].includes('Admin')) {
-            return true;
+        if (this.auth.isAuthenticated() && this.auth.getProfile() != null) {
+            if (this.auth.getProfile()['http://getRoles/roles'].includes('Admin')) {
+                return true;
+            }
         }
         else {
             return false;
@@ -605,10 +608,9 @@ var _a;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime__ = __webpack_require__(726);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_debounceTime__ = __webpack_require__(726);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_debounceTime___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_debounceTime__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NavbarComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -626,17 +628,18 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 
-
 //import { AuthService } from '../../services/auth.service';
 var NavbarComponent = (function () {
     function NavbarComponent(auth, input, router) {
+        var _this = this;
         this.auth = auth;
         this.input = input;
         this.router = router;
         this.title = "Lets Code Togather!";
         this.sessionId = "";
+        this.username = "";
         this.searchBox = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */]();
-        this.subject = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["Subject"]();
+        this.auth.userProfile.subscribe(function (profile) { return _this.profile = profile; });
     }
     NavbarComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -648,24 +651,10 @@ var NavbarComponent = (function () {
             .debounceTime(200)
             .subscribe(function (term) { _this.input.changeInput(term); });
     };
-    NavbarComponent.prototype.ngOnDestroy = function () {
-        this.subscription.unsubscribe();
-    };
-    NavbarComponent.prototype.searchProblem = function () {
-        this.router.navigate(['/problems']);
-        // searchBox
-    };
-    NavbarComponent.prototype.getUserName = function () {
-        this.subscriptionName = this.auth.getUserName()
-            .subscribe(function (name) { return console.log(name); });
-    };
     NavbarComponent.prototype.generateSessionId = function () {
         this.sessionId = Math.random().toString(36).substring(2, 6) + Math.random().toString(36).substring(2, 6);
         window.open("/board/" + this.sessionId);
         // this.router.navigate([`/board/${this.sessionId}`]);
-    };
-    NavbarComponent.prototype.getSubject = function () {
-        return this.subject;
     };
     NavbarComponent.prototype.login = function () {
         this.auth.login();
@@ -683,7 +672,7 @@ NavbarComponent = __decorate([
     }),
     __param(0, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* Inject */])("auth")),
     __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* Inject */])('input')),
-    __metadata("design:paramtypes", [Object, Object, typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [Object, Object, typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _a || Object])
 ], NavbarComponent);
 
 var _a;
@@ -815,7 +804,6 @@ var AuthService = (function () {
     function AuthService(router, http) {
         this.router = router;
         this.http = http;
-        this.domain = 'horis.auth0.com';
         this.auth0 = new __WEBPACK_IMPORTED_MODULE_2_auth0_js__["WebAuth"]({
             clientID: '8ISBVQwZmgTAz_FaNa_yT19ufKDN7bU4',
             domain: 'horis.auth0.com',
@@ -825,7 +813,9 @@ var AuthService = (function () {
             redirectUri: 'http://localhost:3000',
             scope: 'openid profile email roles'
         });
+        this.userProfile = new __WEBPACK_IMPORTED_MODULE_3_rxjs__["BehaviorSubject"](undefined);
         this.usernameSubject = new __WEBPACK_IMPORTED_MODULE_3_rxjs__["BehaviorSubject"]('');
+        this.userProfile.next(JSON.parse(localStorage.getItem('profile')));
     }
     AuthService.prototype.ngOnInit = function () {
     };
@@ -871,6 +861,7 @@ var AuthService = (function () {
         return new Date().getTime() < expiresAt;
     };
     AuthService.prototype.getProfile = function () {
+        this.userProfile.next(JSON.parse(localStorage.getItem('profile')));
         return JSON.parse(localStorage.getItem('profile'));
     };
     AuthService.prototype.resetPassword = function () {
@@ -1252,7 +1243,7 @@ exports = module.exports = __webpack_require__(23)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "#username {\n  color: white;\n}\n", ""]);
 
 // exports
 
@@ -1358,7 +1349,7 @@ module.exports = "<section>\n  <header>\n    <select class=\"form-control pull-l
 /***/ 364:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n    <div class=\"container-fluid\">\n      <!-- Brand and toggle get grouped for better mobile display -->\n      <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n        <a class=\"navbar-brand\" href=\"#\">{{title}}</a>\n      </div>\n\n      <!-- Collect the nav links, forms, and other content for toggling -->\n      <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n\n        <form class=\"navbar-form navbar-left\">\n          <div class=\"form-group\">\n            <input type=\"text\" class=\"form-control\" placeholder=\"Search Problem\" [formControl]=\"searchBox\">\n          </div>\n        </form>\n\n        <ul class=\"nav navbar-nav navbar-right\">\n          <li *ngIf=\"!auth.isAuthenticated()\">\n            <form class=\"navbar-form\">\n              <button type = \"button\" class=\"btn btn-primary\" (click)=\"login()\">Sign in</button>\n            </form>\n          </li>\n          <li class=\"dropdown\" *ngIf=\"auth.isAuthenticated()\">\n            <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">{{username}} <span class=\"caret\"></span></a>\n            <ul class=\"dropdown-menu\">\n              <li><a routerLink=\"/profile\">My Profile</a></li>\n              <li role=\"separator\" class=\"divider\"></li>\n              <li><a href=\"#\" (click)='logout()'>Log Out</a></li>\n            </ul>\n          </li>\n        </ul>\n\n      </div>\n      <!-- /.navbar-collapse -->\n    </div>\n    <!-- /.container-fluid -->\n  </nav>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n    <div class=\"container-fluid\">\n      <!-- Brand and toggle get grouped for better mobile display -->\n      <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n        <a class=\"navbar-brand\" href=\"#\">{{title}}</a>\n      </div>\n\n      <!-- Collect the nav links, forms, and other content for toggling -->\n      <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n\n        <form class=\"navbar-form navbar-left\">\n          <div class=\"form-group\">\n            <input type=\"text\" class=\"form-control\" placeholder=\"Search Problem\" [formControl]=\"searchBox\">\n          </div>\n        </form>\n\n        <ul class=\"nav navbar-nav navbar-right\">\n          <li *ngIf=\"!auth.isAuthenticated()\">\n            <form class=\"navbar-form navbar-right\">\n              <button type = \"button\" class=\"btn btn-primary\" (click)=\"login()\">Sign in</button>\n            </form>\n          </li>\n          <li class=\"dropdown\" *ngIf=\"auth.isAuthenticated()\">\n            <!-- <li class=\"main-logo\"><img ng-src=\"{{profile?.picture}}\"></li> -->\n            <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">{{profile?.nickname}} <span class=\"caret\"></span></a>\n            <ul class=\"dropdown-menu\">\n              <li><a routerLink=\"/profile\">My Profile</a></li>\n              <li role=\"separator\" class=\"divider\"></li>\n              <li><a href=\"#\" (click)='logout()'>Log Out</a></li>\n            </ul>\n          </li>\n        </ul>\n\n      </div>\n      <!-- /.navbar-collapse -->\n    </div>\n    <!-- /.container-fluid -->\n  </nav>\n</div>\n"
 
 /***/ }),
 
@@ -1386,7 +1377,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"starter-template\">\
 /***/ 368:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <ul class=\"nav nav-tabs\">\n    <li class=\"active\"><a data-toggle=\"tab\" href=\"#profile\">Profile</a></li>\n    <li><a data-toggle=\"tab\" href=\"#password\">Change Password</a></li>\n  </ul>\n\n  <hr>\n\n  <div class=\"tab-content\">\n    <div id=\"profile\" class=\"tab-pane fade in active\">\n      <h3>Profile</h3>\n\n      <div class=\"form-group\">\n        <label for=\"username\">Username</label>\n        <p>{{ profile?.nickname }}</p>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"email\">Email</label>\n        <input type=\"text\" class=\"form-control\" id=\"email\" name=\"email\"\n        disabled value={{email}}>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"login\">Last Login</label>\n        <p>{{ profile?.updated_at}}</p>\n      </div>\n\n    </div>\n\n    <div id=\"password\" class=\"tab-pane fade\">\n      <h3>Change Password</h3>\n      <div class=\"nav-form\">\n        <button type=\"button\" class=\"btn btn-large btn-success\" (click)=\"resetPassword()\">Reset password via email</button>\n      </div>\n    </div>\n\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <ul class=\"nav nav-tabs\">\n    <li class=\"active\"><a data-toggle=\"tab\" href=\"#profile\">Profile</a></li>\n    <li><a data-toggle=\"tab\" href=\"#password\">Change Password</a></li>\n  </ul>\n\n  <hr>\n\n  <div class=\"tab-content\">\n    <div id=\"profile\" class=\"tab-pane fade in active\">\n      <h3>Profile</h3>\n\n      <div class=\"form-group\">\n        <label for=\"username\">Username</label>\n        <input type=\"text\" class=\"form-control\" id=\"username\" name=\"username\"\n        disabled value={{username}}>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"email\">Email</label>\n        <input type=\"text\" class=\"form-control\" id=\"email\" name=\"email\"\n        disabled value={{email}}>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"login\">Last Login</label>\n        <input type=\"text\" class=\"form-control\" id=\"login\" name=\"login\"\n        disabled value={{login_time}}>\n      </div>\n\n    </div>\n\n    <div id=\"password\" class=\"tab-pane fade\">\n      <h3>Change Password</h3>\n      <div class=\"nav-form\">\n        <button type=\"button\" class=\"btn btn-large btn-success\" (click)=\"resetPassword()\">Reset password via email</button>\n      </div>\n    </div>\n\n  </div>\n</div>\n"
 
 /***/ }),
 

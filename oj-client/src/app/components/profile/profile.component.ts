@@ -11,6 +11,7 @@ export class ProfileComponent implements OnInit {
   profile: any;
   email: string = '';
   username: string = '';
+  login_time: string = '';
 
   constructor(@Inject ("auth") private auth) { }
 
@@ -22,6 +23,7 @@ export class ProfileComponent implements OnInit {
     }
     this.email = this.profile.email;
     this.username = this.profile.nickname;
+    this.login_time = this.profile.updated_at;
   }
   resetPassword() {
     this.auth.resetPassword();

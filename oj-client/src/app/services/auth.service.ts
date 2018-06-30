@@ -13,7 +13,6 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class AuthService {
 
-  domain = 'horis.auth0.com';
 
   auth0 = new auth0.WebAuth({
     clientID: '8ISBVQwZmgTAz_FaNa_yT19ufKDN7bU4',
@@ -25,14 +24,19 @@ export class AuthService {
     scope: 'openid profile email roles'
   });
 
-  private usernameSubject = new BehaviorSubject<string>('');
+  userProfile = new BehaviorSubject<any>(undefined);
 
+  private usernameSubject = new BehaviorSubject<string>('');
+  
   stream: Observable<string>;
 
   nameSubject: Subject<string>;
 
+
   constructor(public router: Router,
-              private http: HttpClient) { }
+              private http: HttpClient) {
+              this.userProfile.next(JSON.parse(localStorage.getItem('profile')));
+             }
 
   ngOnInit() {
   }
@@ -82,6 +86,7 @@ export class AuthService {
   }
 
   public getProfile() {
+    this.userProfile.next(JSON.parse(localStorage.getItem('profile')));
     return JSON.parse(localStorage.getItem('profile'));
   }
 

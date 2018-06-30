@@ -18,16 +18,20 @@ export class NavbarComponent implements OnInit {
   title: String = "Lets Code Togather!";
   sessionId = "";
   profile: any;
-  username: Observable<string>;
+  username = "" ;
   searchBox: FormControl = new FormControl();
   subscription: Subscription;
-  subscriptionName: Subscription;
-  subject = new Subject<string>();
+
+
 
 
   constructor(@Inject ("auth") private auth,
               @Inject('input') private  input,
-              private router: Router ) { }
+              private router: Router ) {
+                this.auth.userProfile.subscribe(
+                  profile => this.profile = profile
+                );
+               }
 
   ngOnInit() {
     if(this.auth.isAuthenticated()){
@@ -41,31 +45,12 @@ export class NavbarComponent implements OnInit {
                             );
   }
 
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
-  }
-
-  searchProblem(): void {
-    this.router.navigate(['/problems']);
-    // searchBox
-  }
-
-  getUserName(): void {
-    this.subscriptionName = this.auth.getUserName()
-                            .subscribe(
-                              name => console.log(name)
-                            );
-  }
-
   generateSessionId() {
     this.sessionId = Math.random().toString(36).substring(2, 6) + Math.random().toString(36).substring(2, 6);
     window.open(`/board/${this.sessionId}`);
     // this.router.navigate([`/board/${this.sessionId}`]);
   }
 
-  getSubject(): Subject<string> {
-    return this.subject;
-  }
 
   login() {
     this.auth.login();

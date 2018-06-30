@@ -12,7 +12,8 @@
 
       <div class="form-group">
         <label for="username">Username</label>
-        <p>{{ profile?.nickname }}</p>
+        <input type="text" class="form-control" id="username" name="username"
+        disabled value={{username}}>
       </div>
 
       <div class="form-group">
@@ -23,7 +24,8 @@
 
       <div class="form-group">
         <label for="login">Last Login</label>
-        <p>{{ profile?.updated_at}}</p>
+        <input type="text" class="form-control" id="login" name="login"
+        disabled value={{login_time}}>
       </div>
 
     </div>
