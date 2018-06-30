@@ -16,7 +16,7 @@ export class DataService {
     this.http.get('api/v1/problems')
              .toPromise()
              .then( (res: Response) => {
-               this._problemSource.next(res.json())
+               this._problemSource.next(JSON.parse(JSON.stringify(res)));
               })
               .catch( this.handleError );
     return this._problemSource.asObservable();
@@ -25,7 +25,7 @@ export class DataService {
   getProblem(id: number): Promise<Problem> {
     return this.http.get(`api/v1/problems/${id}`)
                     .toPromise()
-                    .then( (res: Response) => res.json() )
+                    .then( (res: Response) => JSON.parse(JSON.stringify(res)) )
                     .catch( this.handleError );
   }
 
@@ -40,28 +40,30 @@ export class DataService {
                     .then( (res: Response) => {
                       // call 'getProblems' to let the new problem display
                       this.getProblems();
-                      res.json();
+                      JSON.parse(JSON.stringify(res));
                     })
                     .catch( this.handleError );
   }
 
-  buildAndRun(data): Promise<Object>{
+  buildAndRun(data): Promise<Object> {
     const httpOptions = {
        headers: new HttpHeaders({
        'Content-Type':  'application/json',
       })
     };
-    return this.http.post('api/v1/build_and_run',data,httpOptions)
-      .toPromise()
-      .then((res: Response) => {
-        console.log("data service");
-        console.log(res);
-        return res.json();
-      })
-      .catch(this.handleError);
+    return this.http.post(`/api/v1/build_and_run`, data, httpOptions)
+    .toPromise()
+    .then((res: Response) => {
+      console.log(res);
+      return res;
+    })
+    .catch((error:any) => {
+      return JSON.stringify(error);
+    });
   }
-  private handleError( error: any ): Promise<any> {
-    console.error( 'An error happened: ', error );
-    return Promise.reject (error.body || error);
-  }
+
+  private handleError(error: any): Promise<any> {
+      console.error('An error happened', error);
+      return Promise.reject(error.body || error);
+    }
 }

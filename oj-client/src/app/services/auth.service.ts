@@ -106,7 +106,7 @@ export class AuthService {
     this.http.post(url, body, httpOptions)
     .toPromise()
     .then((res: Response) => {
-      console.log(res.json);
+      console.log(JSON.parse(JSON.stringify(res)));
     })
     .catch(this.handleError);
   }

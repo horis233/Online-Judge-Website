@@ -23,8 +23,8 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li *ngIf="!auth.isAuthenticated()">
-            <form class="navbar-form navbar-right">
-              <button type = "button" class="btn btn-primary" (click)="login()">Sign in</button>
+            <form class="navbar-form navbar-right" >
+              <button type = "button" class="btn"  (click)="login()">Sign in</button>
             </form>
           </li>
           <li class="dropdown" *ngIf="auth.isAuthenticated()">
