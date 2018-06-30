@@ -28,11 +28,9 @@
             </form>
           </li>
           <li class="dropdown" *ngIf="auth.isAuthenticated()">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{profile?.nickname}} <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a routerLink="/profile">My Profile</a></li>
-              <li><a href="#">My Favofite</a></li>
-              <li><a href="#">My Submission</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#" (click)='logout()'>Log Out</a></li>
             </ul>

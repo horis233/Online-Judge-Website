@@ -9,6 +9,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 export class ProfileComponent implements OnInit {
 
   profile: any;
+  email: string = '';
+  username: string = '';
 
   constructor(@Inject ("auth") private auth) { }
 
@@ -16,13 +18,13 @@ export class ProfileComponent implements OnInit {
     if (this.auth.userProfile) {
       this.profile = this.auth.userProfile;
     } else {
-      this.auth.getProfile((err, profile) => {
-        this.profile = profile;
-      });
+      this.profile = this.auth.getProfile();
     }
+    this.email = this.profile.email;
+    this.username = this.profile.nickname;
   }
   resetPassword() {
-  this.auth.resetPassword();
-}
+    this.auth.resetPassword();
+  }
 
 }

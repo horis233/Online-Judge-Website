@@ -1,50 +1,67 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http, Response, Headers } from '@angular/http';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/toPromise';
+import { filter } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { Http, Response, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import 'rxjs/add/operator/toPromise';
+
+(window as any).global = window;
 
 @Injectable()
 export class AuthService {
 
-  userProfile: any;
+  domain = 'horis.auth0.com';
 
   auth0 = new auth0.WebAuth({
     clientID: '8ISBVQwZmgTAz_FaNa_yT19ufKDN7bU4',
     domain: 'horis.auth0.com',
     responseType: 'token id_token',
     audience: 'https://horis.auth0.com/userinfo',
-    redirectUri: 'http://54.152.115.171:3000',
-    scope: 'openid profile email'
+    // redirectUri: 'http://18.217.220.41:3000/callback',
+    redirectUri: 'http://localhost:3000',
+    scope: 'openid profile email roles'
   });
 
-  constructor(public router: Router,private http: Http) {}
+  private usernameSubject = new BehaviorSubject<string>('');
 
-  public login(){
+  stream: Observable<string>;
+
+  nameSubject: Subject<string>;
+
+  constructor(public router: Router,
+              private http: HttpClient) { }
+
+  ngOnInit() {
+  }
+
+  public login() {
     this.auth0.authorize();
   }
 
-  public handleAuthentication(): void {
-    this.auth0.parseHash((err, authResult) => {
+  public handleAuthentication() {
+    this.auth0.parseHash((error, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        this.auth0.client.userInfo(authResult.accessToken, function(err, user) {
+          localStorage.setItem('profile', JSON.stringify(user));
+        });
         window.location.hash = '';
         this.setSession(authResult);
+      } else if (error) {
         this.router.navigate(['/home']);
-      } else if (err) {
-        this.router.navigate(['/home']);
-        console.log(err);
+        console.log(error);
       }
     });
   }
 
   private setSession(authResult): void {
-    // Set the time that the access token will expire at
+    // Set the time that the Access Token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    localStorage.setItem('profile', JSON.stringify(authResult.profile));
   }
 
   public logout(): void {
@@ -59,62 +76,48 @@ export class AuthService {
 
   public isAuthenticated(): boolean {
     // Check whether the current time is past the
-    // access token's expiry time
-    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    // Access Token's expiry time
+    const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
     return new Date().getTime() < expiresAt;
   }
 
-  public getProfile(cb): void {
-    const accessToken = localStorage.getItem('access_token');
-    if (!accessToken) {
-      throw new Error('Access token must exist to fetch profile');
-    }
-
-    const self = this;
-    this.auth0.client.userInfo(accessToken, (err, profile) => {
-      if (profile) {
-        self.userProfile = profile;
-      }
-      cb(err, profile);
-    });
-  }
-
-  public returnProfile(): Object {
+  public getProfile() {
     return JSON.parse(localStorage.getItem('profile'));
   }
 
-  public resetPassword(): void {
-    this.getProfile((err, profile) => {
-      this.userProfile = profile;
-    });
-    let profile = this.userProfile;
-    let url: string = `https://${this.auth0.domain}/dbconnections/change_password`;
-    let headers = new Headers({ 'content-type': 'application/json' });
-    let body = { client_id: '8ISBVQwZmgTAz_FaNa_yT19ufKDN7bU4',
-     email: profile.email,
-     connection: 'Username-Password-Authentication'
-   }
-
-    this.http.post(url, body, headers)
-      .toPromise()
-      .then((res: Response) => {
-        console.log(res.json());
+  public resetPassword() : void {
+    let profile = this.getProfile();
+    let url : string = 'https://horis.auth0.com/dbconnections/change_password';
+    let httpOptions = {
+       headers: new HttpHeaders({
+       'Content-Type':  'application/json',
       })
-      .catch(this.handleError);
-  }
-
-  public isAdmin(): boolean {
-    if (this.isAuthenticated() && this.userProfile.nickname.includes('admin')) {
-      return true;
-    } else {
-      return false;
+    };
+    let body = {
+      client_id: '8ISBVQwZmgTAz_FaNa_yT19ufKDN7bU4',
+      email: profile.email,
+      connection: 'Username-Password-Authentication'
     }
+    this.http.post(url, body, httpOptions)
+    .toPromise()
+    .then((res: Response) => {
+      console.log(res.json);
+    })
+    .catch(this.handleError);
   }
 
-  private handleError (error : any): Promise<any> {
-    console.log("error occurred", error);
+  private handleError(error: any) : Promise<any> {
+    console.error('Error occurred', error);
     return Promise.reject(error.message || error);
   }
 
+  private changeUserName(term) {
+    console.log(term);
+    this.usernameSubject.next(term);
+  }
+
+  public getUserName(): Observable<string> {
+    return this.stream;
+  }
 
 }

@@ -22,7 +22,8 @@ export class NewProblemComponent implements OnInit {
 
   constructor(
     @Inject('data') private dataService,
-    @Inject('auth') private auth) { }
+    @Inject('auth') private auth,
+    @Inject('authGuard') private authGuard) { }
 
   addProblem() : void {
     this.dataService.addProblem(this.newProblem)
