@@ -16,11 +16,7 @@ export class ProfileComponent implements OnInit {
   constructor(@Inject ("auth") private auth) { }
 
   ngOnInit() {
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-    } else {
-      this.profile = this.auth.getProfile();
-    }
+    this.profile = this.auth.getProfile();
     this.email = this.profile.email;
     this.username = this.profile.nickname;
     this.login_time = this.profile.updated_at;

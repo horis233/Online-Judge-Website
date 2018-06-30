@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from "@angular/http";
 import { HttpClientModule } from '@angular/common/http';
-
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { routing } from 'app/app.routes';
 
@@ -16,6 +16,9 @@ import { EditorComponent } from './components/editor/editor.component';
 import { NewProblemComponent } from './components/new-problem/new-problem.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { FootbarComponent } from './components/footbar/footbar.component';
+
 import { SearchPipe } from './pipes/search.pipe';
 
 import { DataService } from 'app/services/data.service';
@@ -34,6 +37,8 @@ import { InputService } from './services/input.service';
     ProfileComponent,
     CallbackComponent,
     EditorComponent,
+    LoadingComponent,
+    FootbarComponent,
     SearchPipe
   ],
   imports: [
@@ -42,7 +47,8 @@ import { InputService } from './services/input.service';
     routing,
     HttpModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
     {
@@ -66,6 +72,7 @@ import { InputService } from './services/input.service';
       useClass: InputService
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ NO_ERRORS_SCHEMA ]
 })
 export class AppModule { }

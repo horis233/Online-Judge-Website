@@ -27,7 +27,7 @@ export class AuthService {
   userProfile = new BehaviorSubject<any>(undefined);
 
   private usernameSubject = new BehaviorSubject<string>('');
-  
+
   stream: Observable<string>;
 
   nameSubject: Subject<string>;

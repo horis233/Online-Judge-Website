@@ -3,7 +3,9 @@ import { ProblemListComponent } from './components/problem-list/problem-list.com
 import { ProblemDetailComponent }from './components/problem-detail/problem-detail.component';
 import { CallbackComponent } from "./components/callback/callback.component";
 import { ProfileComponent } from './components/profile/profile.component';
-import { AuthGuardService } from './services/auth-guard.service'
+import { AuthGuardService } from './services/auth-guard.service';
+import { LoadingComponent } from './components/loading/loading.component';
+
 
 const routes:Routes = [
   {
@@ -14,6 +16,10 @@ const routes:Routes = [
   {
     path:'problems',
     component:ProblemListComponent
+  },
+  {
+    path:'loading',
+    component:LoadingComponent,
   },
   {
     path:'problems/:id',
