@@ -10,10 +10,10 @@
     • Refactored and Improved system throughput by decoupling services using RESTful API and loading balancing by Nginx (REST API, Nginx).
 
 ## System Overview
-![]()
+![](https://github.com/horis233/Online-Judge-Website/blob/master/images_for_readme/1.JPG)
 
 ## System Design Diagram
-![]()
+![](https://github.com/horis233/Online-Judge-Website/blob/master/images_for_readme/2.JPG)
 
 ***
 ## How a request was sent from frontend to backend and back to browser
