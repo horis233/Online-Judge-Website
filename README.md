@@ -2,34 +2,6 @@
 
 ## How build the both client and server sides for this App
 ```
-╔══════════════════════╗        ╔═══════════╗
-║ App.component.html.ts║------➡║ index.html║-------
-╚══════════════════════╝        ╚═══════════╝       |
-    ↗         ↖                                   |
-╔════════╗   ╔════════╗                             |
-║ Navbar ║   ║ Router ║                             |
-╚════════╝   ╚════════╝                             |
-                  ↗    ↖                            |
-╔══════════════════════╗ ╔═══════════════════════╗  |
-║ ProblemListCompinent ║ ║ ProblemDetailComponent║  |
-╚══════════════════════╝ ╚═══════════════════════╝  |
-        ↗                ↘      ↓ onInit function |
-╔══════════════════════╗   ╔════════════╗           |
-║  NewProblemCompinent ║ ➡║ DataService║           |
-╚══════════════════════╝   ╚════════════╝           |
-              (api Request)  ↑  ↓           ╔═══════════╗
------------------------------↑  ↓ --------  ║public/    ║
-                             ↑    ↘         ║ index.html║
-                             ↑       ↘      ╚═══════════╝
-╔══════════════╗     ╔═══════════╗    ↘    ↗  Index   
-║ProblemService║ ↔↔↔ ║Rest Router║    ↓    ↑    Router
-╚══════════════╝     ║  rest.js  ║   ╔═══════════╗
-    ↓↑               ╚═══════════╝ ↖ ║ Server.js ║
-    ↓↑                               ╚═══════════╝
-    ↓↑                                     ║
-╔══════════════╗      ╔══════════╗ connect ║
-║ ProblemModel ║  ←←← ║ MongoDB  ║ ════════╝
-╚══════════════╝      ╚══════════╝
 ```
 ***
 ## How a request was sent from frontend to backend and back to browser
