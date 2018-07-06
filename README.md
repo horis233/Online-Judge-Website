@@ -1,8 +1,20 @@
 # COJ_project
+# Collaborative-Online-Judge-System
 
-## How build the both client and server sides for this App
-```
-```
+    • Implemented a web-based collaborative code editor which supports multiple user editing simultaneously (ACE, Socket.io, Redis);
+
+    • Designed and developed a single-page web application for coding problems (Angular2, Auth0, Node.js, MongoDB);
+
+    • Built a user-code executor service which can build and execute user’s code (Docker, Flask);
+
+    • Refactored and Improved system throughput by decoupling services using RESTful API and loading balancing by Nginx (REST API, Nginx).
+
+## System Overview
+![](https://github.com/horis233/Online-Judge-Website/blob/master/images_for_readme/1.JPG)
+
+## System Design Diagram
+![](https://github.com/horis233/Online-Judge-Website/blob/master/images_for_readme/2.JPG)
+
 ***
 ## How a request was sent from frontend to backend and back to browser
 
