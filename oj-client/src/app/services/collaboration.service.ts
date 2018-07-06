@@ -70,10 +70,6 @@ export class CollaborationService {
   }
 
 
-
-
-
-
   change(delta: string) {
     this.collaborationSocket.emit("change", delta);
   }
@@ -94,7 +90,4 @@ export class CollaborationService {
     this.collaborationSocket.disconnect();
   }
 
-  loadContents():void {
-    this.collaborationSocket.emit('getContent');
-  }
 }

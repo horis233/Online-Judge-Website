@@ -93,8 +93,7 @@ public static void main(String[] args) {
       this.collaboration.cursorMove(JSON.stringify(cursor));
     });
 
-    //this.collaboration.restoreBuffer();
-    this.collaboration.loadContents();
+    this.collaboration.restoreBuffer();
   }
 
   resetEditor(): void {
@@ -123,7 +122,7 @@ public static void main(String[] args) {
 	  this.randomSID=this.joinSID;
     this.collaboration.init(this.editor,this.sessionId);
     this.editor.lastAppliedChange = null;
-    this.collaboration.loadContents();
+    this.collaboration.restoreBuffer();
   }
 
   checkJoinSID():void {

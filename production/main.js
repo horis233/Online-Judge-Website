@@ -366,8 +366,7 @@ var EditorComponent = /** @class */ (function () {
             console.log('CLIENT! CURSOR' + JSON.stringify(cursor));
             _this.collaboration.cursorMove(JSON.stringify(cursor));
         });
-        //this.collaboration.restoreBuffer();
-        this.collaboration.loadContents();
+        this.collaboration.restoreBuffer();
     };
     EditorComponent.prototype.resetEditor = function () {
         console.log('Resetting editor');
@@ -393,7 +392,7 @@ var EditorComponent = /** @class */ (function () {
         this.randomSID = this.joinSID;
         this.collaboration.init(this.editor, this.sessionId);
         this.editor.lastAppliedChange = null;
-        this.collaboration.loadContents();
+        this.collaboration.restoreBuffer();
     };
     EditorComponent.prototype.checkJoinSID = function () {
         var _this = this;
@@ -1505,9 +1504,6 @@ var CollaborationService = /** @class */ (function () {
     };
     CollaborationService.prototype.disconnect = function () {
         this.collaborationSocket.disconnect();
-    };
-    CollaborationService.prototype.loadContents = function () {
-        this.collaborationSocket.emit('getContent');
     };
     CollaborationService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
