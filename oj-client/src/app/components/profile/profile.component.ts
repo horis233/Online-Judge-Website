@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-//import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -7,22 +7,59 @@ import { Component, OnInit, Inject } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  profile:any;
+  nickname:string;
+  email:string;
+  picUrl:string;
+  created:string;
+  lastlogin:string;
 
-  profile: any;
-  email: string = '';
-  username: string = '';
-  login_time: string = '';
+  role:string;
+  name:string;
+  verified:boolean;
 
-  constructor(@Inject ("auth") private auth) { }
+
+  newNick:string;
+
+  constructor(@Inject('authV2') private auth) { }
 
   ngOnInit() {
-    this.profile = this.auth.getProfile();
-    this.email = this.profile.email;
-    this.username = this.profile.nickname;
-    this.login_time = this.profile.updated_at;
-  }
-  resetPassword() {
-    this.auth.resetPassword();
+  	if (this.auth.authenticated()) {
+  		this.readProfile();
+  	}
   }
 
+  readProfile():void {
+
+    this.profile = this.auth.getProfile();
+    console.log(this.profile);
+    this.nickname = this.profile.user_metadata.nickname;
+    this.newNick=this.nickname;
+    this.email = this.profile.email;
+    this.picUrl = this.profile.picture;
+    this.created = this.profile.created_at.substring(0, 10);
+    this.lastlogin= this.profile.updated_at.substring(0, 10);
+    this.role = 'Free User';
+
+    if (this.profile.roles.length!=0) {
+      this.role = this.profile.roles[0];
+    }
+
+    this.name = this.profile.user_metadata.full_name;
+
+    this.verified=(this.profile.email_verified);
+
+  }
+
+  updateInfo():void {
+    let data:any = JSON.stringify({ user_metadata: {nickname: this.newNick, full_name:this.name} })
+    this.auth.updateInfo(data)
+      .then( (p:string) =>{
+        let tmp:object = JSON.parse(p);
+        this.profile.user_metadata.nickname = tmp['user_metadata'].nickname;
+        localStorage.setItem('profile',JSON.stringify(this.profile) );
+        this.auth.sendNickName(tmp['user_metadata'].nickname);
+        this.readProfile();
+      });
+  }
 }

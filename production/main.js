@@ -114,20 +114,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_new_problem_new_problem_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/new-problem/new-problem.component */ "./src/app/components/new-problem/new-problem.component.ts");
 /* harmony import */ var _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/navbar/navbar.component */ "./src/app/components/navbar/navbar.component.ts");
 /* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/profile/profile.component */ "./src/app/components/profile/profile.component.ts");
-/* harmony import */ var _components_loading_loading_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/loading/loading.component */ "./src/app/components/loading/loading.component.ts");
-/* harmony import */ var _components_footbar_footbar_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/footbar/footbar.component */ "./src/app/components/footbar/footbar.component.ts");
+/* harmony import */ var _components_footbar_footbar_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/footbar/footbar.component */ "./src/app/components/footbar/footbar.component.ts");
+/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
 /* harmony import */ var _pipes_search_pipe__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pipes/search.pipe */ "./src/app/pipes/search.pipe.ts");
 /* harmony import */ var app_services_data_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! app/services/data.service */ "./src/app/services/data.service.ts");
 /* harmony import */ var app_services_auth_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! app/services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/auth-guard.service */ "./src/app/services/auth-guard.service.ts");
-/* harmony import */ var _services_collaboration_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./services/collaboration.service */ "./src/app/services/collaboration.service.ts");
-/* harmony import */ var _services_input_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./services/input.service */ "./src/app/services/input.service.ts");
+/* harmony import */ var _services_auth_v2_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/auth-v2.service */ "./src/app/services/auth-v2.service.ts");
+/* harmony import */ var _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./services/auth-guard.service */ "./src/app/services/auth-guard.service.ts");
+/* harmony import */ var _services_collaboration_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./services/collaboration.service */ "./src/app/services/collaboration.service.ts");
+/* harmony import */ var _services_input_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./services/input.service */ "./src/app/services/input.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -163,9 +165,9 @@ var AppModule = /** @class */ (function () {
                 _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_11__["NavbarComponent"],
                 _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_12__["ProfileComponent"],
                 _components_editor_editor_component__WEBPACK_IMPORTED_MODULE_9__["EditorComponent"],
-                _components_loading_loading_component__WEBPACK_IMPORTED_MODULE_13__["LoadingComponent"],
-                _components_footbar_footbar_component__WEBPACK_IMPORTED_MODULE_14__["FootbarComponent"],
-                _pipes_search_pipe__WEBPACK_IMPORTED_MODULE_15__["SearchPipe"]
+                _components_footbar_footbar_component__WEBPACK_IMPORTED_MODULE_13__["FootbarComponent"],
+                _pipes_search_pipe__WEBPACK_IMPORTED_MODULE_15__["SearchPipe"],
+                _components_home_home_component__WEBPACK_IMPORTED_MODULE_14__["HomeComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -185,16 +187,20 @@ var AppModule = /** @class */ (function () {
                     useClass: app_services_auth_service__WEBPACK_IMPORTED_MODULE_17__["AuthService"]
                 },
                 {
+                    provide: 'authV2',
+                    useClass: _services_auth_v2_service__WEBPACK_IMPORTED_MODULE_18__["AuthV2Service"]
+                },
+                {
                     provide: 'authGuard',
-                    useClass: _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_18__["AuthGuardService"]
+                    useClass: _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_19__["AuthGuardService"]
                 },
                 {
                     provide: 'collaboration',
-                    useClass: _services_collaboration_service__WEBPACK_IMPORTED_MODULE_19__["CollaborationService"]
+                    useClass: _services_collaboration_service__WEBPACK_IMPORTED_MODULE_20__["CollaborationService"]
                 },
                 {
                     provide: "input",
-                    useClass: _services_input_service__WEBPACK_IMPORTED_MODULE_20__["InputService"]
+                    useClass: _services_input_service__WEBPACK_IMPORTED_MODULE_21__["InputService"]
                 }
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
@@ -221,7 +227,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_problem_list_problem_list_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/problem-list/problem-list.component */ "./src/app/components/problem-list/problem-list.component.ts");
 /* harmony import */ var _components_problem_detail_problem_detail_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/problem-detail/problem-detail.component */ "./src/app/components/problem-detail/problem-detail.component.ts");
 /* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/profile/profile.component */ "./src/app/components/profile/profile.component.ts");
-/* harmony import */ var _components_loading_loading_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/loading/loading.component */ "./src/app/components/loading/loading.component.ts");
+/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
 
 
 
@@ -230,16 +236,16 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [
     {
         path: '',
-        redirectTo: 'problems',
+        redirectTo: 'home',
         pathMatch: 'full'
+    },
+    {
+        path: 'home',
+        component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"]
     },
     {
         path: 'problems',
         component: _components_problem_list_problem_list_component__WEBPACK_IMPORTED_MODULE_1__["ProblemListComponent"]
-    },
-    {
-        path: 'loading',
-        component: _components_loading_loading_component__WEBPACK_IMPORTED_MODULE_4__["LoadingComponent"],
     },
     {
         path: 'problems/:id',
@@ -251,7 +257,7 @@ var routes = [
     },
     {
         path: '**',
-        redirectTo: 'problems'
+        redirectTo: 'home'
     }
 ];
 var routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forRoot(routes);
@@ -277,7 +283,7 @@ module.exports = "@media screen {\n #editor {\n   height: 600px;\n }\n .lang-sel
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n  <header>\n    <select class=\"form-control pull-left lang-select\" id=\"language\"\n        name=\"language\"\n        [(ngModel)]=\"language\"\n        (change)=\"setLanguage(language)\"\n       >\n       <option *ngFor=\"let language of languages\"\n       [value]=\"language\">\n         {{language}}\n       </option>\n    </select>\n    <button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#myModal\">\n      <span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span>\n    </button>\n    <!-- Modal -->\n    <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n      <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n          <div class=\"modal-header\">\n            <h1 class=\"modal-title\" id=\"exampleModalLabel\">Reset?</h1>\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n              <span aria-hidden=\"true\">&times;</span>\n            </button>\n          </div>\n          <div class=\"modal-body\">\n              You will lose current code in the window, are you sure?\n          </div>\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n              (click)=\"resetEditor()\">Reset</button>\n            <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Cancel</button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </header>\n<br>\n  <div class=\"row\">\n    <div id=\"editor\"></div>\n    <div>\n        {{output}}\n    </div>\n  </div>\n  <br>\n  <footer class=\"editor-footer\">\n    <button type=\"button\" class=\"btn btn-success pull-right\" (click)=\"submit()\">\n      Submit Solution\n    </button>\n  </footer>\n</section>\n"
+module.exports = "<section>\n  <header>\n    <select class=\"form-control pull-left lang-select\" id=\"language\"\n        name=\"language\"\n        [(ngModel)]=\"language\"\n        (change)=\"setLanguage(language)\">\n       <option *ngFor=\"let language of languages\"\n       [value]=\"language\">\n         {{language}}\n       </option>\n    </select>\n\n    <button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#myModal\">\n      <span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span>\n    </button>\n\n\n\n\n    <div class=\"col-sm-7 pull-right\">\n      <div class=\"btn-group  pull-right\">\n      <button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#join\">\n        <span class=\"glyphicon glyphicon-plus\"></span>Join\n      </button>\n      <button id=\"invite\" type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#invitepop\">\n        <span class=\"glyphicon glyphicon-envelope\"></span> Invite\n      </button>\n      <button type=\"button\" class=\"btn btn-default\" *ngIf=\"numUsers=='1'\">\n      <span class=\"glyphicon glyphicon-user\"></span> {{numUsers}}\n      </button>\n      <button type=\"button\" class=\"btn btn-default\" *ngIf=\"numUsers!='1'\">\n      <span class=\"glyphicon glyphicon-user\" style=\"color: #ffaa00\"></span> {{numUsers}}\n      </button>\n      </div>\n    </div>\n\n    <!-- Modal -->\n          <div id=\"invitepop\" class=\"modal fade\" role=\"dialog\">\n            <div class=\"modal-dialog\">\n\n              <!-- Modal content-->\n              <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                  <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n                  <h4 class=\"modal-title\">Invite your friend with this code</h4>\n                </div>\n                <div class=\"modal-body\">\n\n                  <div class=\"alert alert-success\" role=\"success\">\n                    <span class=\"glyphicon glyphicon-ok pull-right\" aria-hidden=\"true\"></span>{{randomSID}}\n                  </div>\n\n\n                </div>\n                <div class=\"modal-footer\">\n                  <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Close</button>\n                </div>\n              </div>\n\n            </div>\n          </div>\n\n\n          <!-- Modal -->\n          <div id=\"join\" class=\"modal fade\" role=\"dialog\">\n            <div class=\"modal-dialog\">\n              <!-- Modal content-->\n              <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                  <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n                  <h4 class=\"modal-title\">Enter Invited Code</h4>\n                </div>\n                <div class=\"modal-body\">\n                    <div class=\"form-group\">\n                      <label for=\"usr\">Invited Code</label>\n                      <input type=\"text\" class=\"form-control\" [(ngModel)]=\"joinSID\" (ngModelChange)=\"checkJoinSID()\">\n                    </div>\n                    <div class=\"alert alert-warning\" *ngIf=\"redirectProblemMsg\">\n                      You are not doing the same problem with your friend(s).\n                      <span class=\"glyphicon glyphicon-info-sign pull-right\"></span>\n                    </div>\n                </div>\n                <div class=\"modal-footer\">\n                  <button type=\"button\" class=\"btn btn-success\" data-dismiss=\"modal\" (click)=\"joinRoom()\" [disabled]=\"!validJoinSID\">Join</button>\n                  <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Close</button>\n                </div>\n              </div>\n            </div>\n          </div>\n\n\n\n\n\n\n    <!-- Modal -->\n    <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n      <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n          <div class=\"modal-header\">\n            <h1 class=\"modal-title\" id=\"exampleModalLabel\">Reset?</h1>\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n              <span aria-hidden=\"true\">&times;</span>\n            </button>\n          </div>\n          <div class=\"modal-body\">\n              You will lose current code in the window, are you sure?\n          </div>\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n              (click)=\"resetEditor()\">Reset</button>\n            <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Cancel</button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </header>\n<br>\n  <div class=\"row\">\n    <div id=\"editor\"></div>\n    <div>\n        {{output}}\n    </div>\n  </div>\n  <br>\n  <footer class=\"editor-footer\">\n    <button type=\"button\" class=\"btn btn-success pull-right\" (click)=\"submit()\">\n      Submit Solution\n    </button>\n  </footer>\n</section>\n"
 
 /***/ }),
 
@@ -308,10 +314,16 @@ var __param = (undefined && undefined.__param) || function (paramIndex, decorato
 
 
 var EditorComponent = /** @class */ (function () {
-    function EditorComponent(collaboration, dataService, route) {
+    function EditorComponent(collaboration, dataService, auth, route) {
         this.collaboration = collaboration;
         this.dataService = dataService;
+        this.auth = auth;
         this.route = route;
+        this.randomSID = "1";
+        this.joinSID = "";
+        this.validJoinSID = false;
+        this.redirectProblemMsg = false;
+        this.numUsers = "1";
         this.language = 'Java';
         this.languages = ['Java', 'Python'];
         this.defaultContent = {
@@ -322,12 +334,12 @@ var EditorComponent = /** @class */ (function () {
     }
     EditorComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.route.params.subscribe(function (params) {
-            // this.problem = this.data.getProblem(+params['id']);
-            _this.sessionId = params['id'];
-            _this.initEditor();
-            _this.collaboration.restoreBuffer();
+        // this.collaboration.restoreBuffer();
+        this.numUsersSub = this.collaboration.getRoomUserNum().subscribe(function (num) {
+            console.log(num);
+            _this.numUsers = num;
         });
+        this.initEditor();
     };
     EditorComponent.prototype.initEditor = function () {
         var _this = this;
@@ -336,10 +348,9 @@ var EditorComponent = /** @class */ (function () {
         document.getElementsByTagName('textarea')[0].focus();
         this.editor.setFontSize(18);
         this.resetEditor();
+        this.generateRandomSessionId();
+        this.sessionId = this.randomSID;
         this.editor.$blockScrolling = Infinity;
-        // this.editor.getSession().setMode('ace/mode/java');
-        // this.editor.setValue(this.defaultContent['Java']);
-        this.resetEditor();
         this.collaboration.init(this.editor, this.sessionId);
         this.editor.lastAppliedChange = null;
         // registering change callback
@@ -355,7 +366,8 @@ var EditorComponent = /** @class */ (function () {
             console.log('CLIENT! CURSOR' + JSON.stringify(cursor));
             _this.collaboration.cursorMove(JSON.stringify(cursor));
         });
-        this.collaboration.restoreBuffer();
+        //this.collaboration.restoreBuffer();
+        this.collaboration.loadContents();
     };
     EditorComponent.prototype.resetEditor = function () {
         console.log('Resetting editor');
@@ -364,10 +376,47 @@ var EditorComponent = /** @class */ (function () {
     };
     EditorComponent.prototype.setLanguage = function (language) {
         this.language = language;
-        // add a map for language and js file name
-        // this.editor.getSession().setMode(`ace/mode/${language.toLowerCase()}`);
-        // this.editor.setValue(this.defaultContent[language]);
         this.resetEditor();
+    };
+    EditorComponent.prototype.generateRandomSessionId = function () {
+        var _this = this;
+        this.route.params.subscribe(function (input) {
+            var nickname = _this.auth.getProfile().nickname;
+            _this.randomSID = input["id"] + '-' + nickname + Math.floor((Math.random() * 10000) + 10000);
+            console.log(_this.randomSID);
+        });
+    };
+    EditorComponent.prototype.joinRoom = function () {
+        this.collaboration.disconnect();
+        this.resetEditor();
+        this.sessionId = this.joinSID;
+        this.randomSID = this.joinSID;
+        this.collaboration.init(this.editor, this.sessionId);
+        this.editor.lastAppliedChange = null;
+        this.collaboration.loadContents();
+    };
+    EditorComponent.prototype.checkJoinSID = function () {
+        var _this = this;
+        console.log(this.joinSID.match(/\d+-\w+\d+/));
+        this.route.params.subscribe(function (input) {
+            if (_this.joinSID.match(/\d+-\w+\d+/g)) {
+                var hidx = _this.joinSID.indexOf('-');
+                var pid = _this.joinSID.substring(0, hidx);
+                console.log(pid + ' ' + input["id"]);
+                if (pid == input["id"]) {
+                    _this.validJoinSID = true;
+                    _this.redirectProblemMsg = false;
+                }
+                else {
+                    _this.validJoinSID = false;
+                    _this.redirectProblemMsg = true;
+                }
+            }
+            else {
+                _this.validJoinSID = false;
+                _this.redirectProblemMsg = false;
+            }
+        });
     };
     EditorComponent.prototype.submit = function () {
         var _this = this;
@@ -378,7 +427,10 @@ var EditorComponent = /** @class */ (function () {
             lang: this.language.toLocaleLowerCase()
         };
         this.dataService.buildAndRun(data)
-            .then(function (res) { return _this.output = res.text; });
+            .then(function (res) {
+            _this.output = res.text;
+            jQuery('#submitBtn').button('reset');
+        });
     };
     EditorComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -388,7 +440,8 @@ var EditorComponent = /** @class */ (function () {
         }),
         __param(0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])('collaboration')),
         __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])('data')),
-        __metadata("design:paramtypes", [Object, Object, _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]])
+        __param(2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])('auth')),
+        __metadata("design:paramtypes", [Object, Object, Object, _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]])
     ], EditorComponent);
     return EditorComponent;
 }());
@@ -404,7 +457,7 @@ var EditorComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "body {\n  padding-bottom: 40px;\n}\n.social:hover {\n     -webkit-transform: scale(1.1);\n     -moz-transform: scale(1.1);\n     -o-transform: scale(1.1);\n }\n.social {\n     -webkit-transform: scale(0.9);\n     -moz-transform: scale(0.9);\n     -o-transform: scale(0.9);\n     -webkit-transition-duration: 0.5s;\n     -moz-transition-duration: 0.5s;\n     -o-transition-duration: 0.5s;\n     color: #FEDFE1\n }\n#social-fb:hover {\n     color: #3B5998;\n }\n#social-li:hover {\n     color: #0077B5;\n }\n#social-gh:hover {\n     color: #24292E;\n }\n"
+module.exports = "\n .social {\n     -webkit-transform: translateX(-100%);\n     -moz-transform: translateX(-100%);\n     -o-transform: translateX(-100%);\n     -webkit-transition-duration: 0.5s;\n     -moz-transition-duration: 0.5s;\n     -o-transition-duration: 0.5s;\n     color: #71ae3e;\n }\n\n #social-fb:hover {\n     color: #3B5998;\n }\n\n #social-li:hover {\n     color: #0077B5;\n }\n\n #social-gh:hover {\n     color: #24292E;\n }\n"
 
 /***/ }),
 
@@ -415,7 +468,7 @@ module.exports = "body {\n  padding-bottom: 40px;\n}\n.social:hover {\n     -web
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<link href=\"//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css\" rel=\"stylesheet\">\n<link href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==\" crossorigin=\"anonymous\">\n<!-- <div class=\"container\"> -->\n  <nav class=\"navbar navbar-fixed-bottom\">\n    <div class=\"container-fluid\" >\n        <div class=\"text-center center-block\">\n            <span class=\"text-center \"><strong> Horis Hu </strong></span>\n            <br>\n              <a href=\"http://www.linkedin.com/in/horis-hu\" ><i id=\"social-li\" class=\"fa fa-linkedin-square fa-3x social\" aria-hidden=\"true\"></i></a>\n              <a href=\"https://www.facebook.com/jiaming.hu.714\"><i id=\"social-fb\" class=\"fa fa-facebook-square fa-3x social\"></i></a>\n\t            <a href=\"https://github.com/horis233\"><i id=\"social-gh\" class=\"fa fa-github-square fa-3x social\"></i></a>\n        </div>\n    </div>\n  </nav>\n<!-- </div> -->\n\n<link href=\"//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css\" rel=\"stylesheet\">\n"
+module.exports = "<link href=\"//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css\" rel=\"stylesheet\">\n<link href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==\" crossorigin=\"anonymous\">\n<div class=\"container\">\n  <div class=\"navbar navbar-default \">\n    <div class=\"container\">\n      <p class=\"hidden-xs navbar-text text-center\">© 2018 - Project built by Jiaming(Horis) Hu\n      </p>\n\n      <p class=\"visible-xs navbar-text text-center\">© 2018 - Project built by Jiaming(Horis) Hu\n        <a href=\"https://www.facebook.com/jiaming.hu.714\" class=\"fa fa-facebook-square\"></a>\n        <a href=\"https://github.com/horis233\" class=\"fa fa-github-square\"></a>\n        <a href=\"http://www.linkedin.com/in/horis-hu\" class=\"fa fa-linkedin-square\"></a>\n      </p>\n      <div class=\"btn-container-right\">\n        <a href=\"https://www.facebook.com/jiaming.hu.714\"><i id=\"social-fb\" class=\"hidden-xs navbar-btn pull-right fa fa-facebook-square fa-3x social\"></i></a>\n        <a href=\"https://github.com/horis233\"><i id=\"social-gh\" class=\"hidden-xs navbar-btn  pull-right fa fa-github-square fa-3x social\"></i></a>\n        <a href=\"http://www.linkedin.com/in/horis-hu\"><i id=\"social-li\" class=\"hidden-xs navbar-btn pull-right fa fa-linkedin-square fa-3x social\"></i></a>\n      <div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -460,40 +513,39 @@ var FootbarComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/components/loading/loading.component.css":
-/*!**********************************************************!*\
-  !*** ./src/app/components/loading/loading.component.css ***!
-  \**********************************************************/
+/***/ "./src/app/components/home/home.component.css":
+/*!****************************************************!*\
+  !*** ./src/app/components/home/home.component.css ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "img {\n\twidth:100%;\n}\n\n.jumbotron {\n\tcolor:white;\n\tbackground-color: #d86a5f;\n}\n\n.btn{\n  background-color: #81C7D4;\n  color: white;\n}\n"
 
 /***/ }),
 
-/***/ "./src/app/components/loading/loading.component.html":
-/*!***********************************************************!*\
-  !*** ./src/app/components/loading/loading.component.html ***!
-  \***********************************************************/
+/***/ "./src/app/components/home/home.component.html":
+/*!*****************************************************!*\
+  !*** ./src/app/components/home/home.component.html ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"loading\">\n  <img src=\"assets/loading.svg\" alt=\"loading\">\n</div>\n"
+module.exports = "<div class=\"container\">\n\t<div class=\"row\">\n\t<div class=\"col-xs-12 col-md-10 col-md-offset-1\">\n\t\t<div class=\"jumbotron\">\n\t\t  <div class=\"container\">\n\t\t\t  <div class=\"row\">\n\t\t\t\t  <div class=\"col-xs-12\">\n\t\t\t\t  <h2>Code with Your Friends!</h2>\n\n\t\t\t\t  <h3>Project: Collaborative Online Code Judge System</h3>\n\t\t\t\t  <div class=\"row\">\n\t\t\t\t\t  <div class=\"col-xs-1\">\n\t\t\t\t\t  <p> <span class=\"glyphicon glyphicon-ok\"></span></p>\n\t\t\t\t\t  </div>\n\n\t\t\t\t\t  <div class=\"col-xs-11\">\n\t\t\t\t\t  <p>Code, build, and excute source codes here.</p>\n\t\t\t\t\t  </div>\n\t\t\t\t  </div>\n\t\t\t\t  <div class=\"row\">\n\t\t\t\t\t  <div class=\"col-xs-1\">\n\t\t\t\t\t  <p> <span class=\"glyphicon glyphicon-ok\"></span></p>\n\t\t\t\t\t  </div>\n\n\t\t\t\t\t  <div class=\"col-xs-11\">\n\t\t\t\t\t  <p>Practice and take coding challange.</p>\n\t\t\t\t\t  </div>\n\t\t\t\t  </div>\n\n\t\t\t\t  <div class=\"row\">\n\t\t\t\t\t  <div class=\"col-xs-1\">\n\t\t\t\t\t  <p> <span class=\"glyphicon glyphicon-ok\"></span></p>\n\t\t\t\t\t  </div>\n\n\t\t\t\t\t  <div class=\"col-xs-11\">\n\t\t\t\t\t  <p>Invite your friend or join your friends' room to code together.</p>\n\t\t\t\t\t  </div>\n\t\t\t\t  </div>\n\t\t\t\t  <h3>Implementation</h3>\n\t\t\t\t  <pre>\nFrontend:\n - Angular 4, Bootstrap 3\nBackend:\n - Framework: ExpressJS, Socket.io, Flask\n - Node.js, NginX, Docker\nDatabase: MongoDB, Redis\n\nBuilt on AWS EC2 (Ubuntu16.04 with Docker)</pre>\n\t\t\t\t  <a class=\"btn btn-lg\" href=\"/problems\" role=\"button\">Try it</a>\n\t\t\t\t  </div>\n\n\t\t\t  </div>\n\t\t   </div>\n\t\t</div>\n\t</div>\n\n</div>\n"
 
 /***/ }),
 
-/***/ "./src/app/components/loading/loading.component.ts":
-/*!*********************************************************!*\
-  !*** ./src/app/components/loading/loading.component.ts ***!
-  \*********************************************************/
-/*! exports provided: LoadingComponent */
+/***/ "./src/app/components/home/home.component.ts":
+/*!***************************************************!*\
+  !*** ./src/app/components/home/home.component.ts ***!
+  \***************************************************/
+/*! exports provided: HomeComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadingComponent", function() { return LoadingComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -503,33 +555,21 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 
-
-var LoadingComponent = /** @class */ (function () {
-    function LoadingComponent(auth, router) {
-        this.auth = auth;
-        this.router = router;
+var HomeComponent = /** @class */ (function () {
+    function HomeComponent() {
     }
-    LoadingComponent.prototype.ngOnInit = function () {
-        this.redirect();
+    HomeComponent.prototype.ngOnInit = function () {
     };
-    LoadingComponent.prototype.redirect = function () {
-        if (this.auth.isAuthenticated())
-            this.router.navigate(['/problems']);
-    };
-    LoadingComponent = __decorate([
+    HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-loading',
-            template: __webpack_require__(/*! ./loading.component.html */ "./src/app/components/loading/loading.component.html"),
-            styles: [__webpack_require__(/*! ./loading.component.css */ "./src/app/components/loading/loading.component.css")]
+            selector: 'app-home',
+            template: __webpack_require__(/*! ./home.component.html */ "./src/app/components/home/home.component.html"),
+            styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/components/home/home.component.css")]
         }),
-        __param(0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])("auth")),
-        __metadata("design:paramtypes", [Object, _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
-    ], LoadingComponent);
-    return LoadingComponent;
+        __metadata("design:paramtypes", [])
+    ], HomeComponent);
+    return HomeComponent;
 }());
 
 
@@ -554,7 +594,7 @@ module.exports = "#username {\n  color: white;\n}\n.btn{\n  background-color: #8
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n    <div class=\"container-fluid\">\n      <!-- Brand and toggle get grouped for better mobile display -->\n      <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n        <a class=\"navbar-brand\" href=\"#\">{{title}}</a>\n      </div>\n\n      <!-- Collect the nav links, forms, and other content for toggling -->\n      <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n\n        <form class=\"navbar-form navbar-left\">\n          <div class=\"form-group\">\n            <input type=\"text\" class=\"form-control\" placeholder=\"Search Problem\" [formControl]=\"searchBox\">\n          </div>\n        </form>\n\n        <ul class=\"nav navbar-nav navbar-right\">\n          <li *ngIf=\"!auth.isAuthenticated()\">\n            <form class=\"navbar-form navbar-right\" >\n              <button type = \"button\" class=\"btn\"  (click)=\"login()\">Sign in</button>\n            </form>\n          </li>\n          <li class=\"dropdown\" *ngIf=\"auth.isAuthenticated()\">\n            <!-- <li class=\"main-logo\"><img ng-src=\"{{profile?.picture}}\"></li> -->\n            <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">{{profile?.nickname}} <span class=\"caret\"></span></a>\n            <ul class=\"dropdown-menu\">\n              <li><a routerLink=\"/profile\">My Profile</a></li>\n              <li role=\"separator\" class=\"divider\"></li>\n              <li><a href=\"#\" (click)='logout()'>Log Out</a></li>\n            </ul>\n          </li>\n        </ul>\n\n      </div>\n      <!-- /.navbar-collapse -->\n    </div>\n    <!-- /.container-fluid -->\n  </nav>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n    <div class=\"container-fluid\">\n      <!-- Brand and toggle get grouped for better mobile display -->\n      <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n        <a class=\"navbar-brand\" href=\"#\">{{title}}</a>\n      </div>\n\n      <!-- Collect the nav links, forms, and other content for toggling -->\n      <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n\n        <form class=\"navbar-form navbar-left\">\n          <div class=\"form-group\">\n            <input type=\"text\" class=\"form-control\" placeholder=\"Search Problem\" [formControl]=\"searchBox\">\n          </div>\n        </form>\n\n        <ul class=\"nav navbar-nav navbar-right\">\n          <li *ngIf=\"!auth.isAuthenticated()\">\n            <form class=\"navbar-form navbar-right\" >\n              <button type = \"button\" class=\"btn\"  (click)=\"login()\">Sign in</button>\n            </form>\n          </li>\n          <li class=\"dropdown\" *ngIf=\"auth.isAuthenticated()\">\n            <!-- <li class=\"main-logo\"><img ng-src=\"{{profile?.picture}}\"></li> -->\n            <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">{{username}} <span class=\"caret\"></span></a>\n            <ul class=\"dropdown-menu\">\n              <li><a routerLink=\"/profile\">My Profile</a></li>\n              <li role=\"separator\" class=\"divider\"></li>\n              <li><a href=\"#\" (click)='logout()'>Log Out</a></li>\n            </ul>\n          </li>\n        </ul>\n\n      </div>\n      <!-- /.navbar-collapse -->\n    </div>\n    <!-- /.container-fluid -->\n  </nav>\n</div>\n"
 
 /***/ }),
 
@@ -591,7 +631,6 @@ var __param = (undefined && undefined.__param) || function (paramIndex, decorato
 //import { AuthService } from '../../services/auth.service';
 var NavbarComponent = /** @class */ (function () {
     function NavbarComponent(auth, input, router) {
-        var _this = this;
         this.auth = auth;
         this.input = input;
         this.router = router;
@@ -599,12 +638,15 @@ var NavbarComponent = /** @class */ (function () {
         this.sessionId = "";
         this.username = "";
         this.searchBox = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]();
-        this.auth.userProfile.subscribe(function (profile) { return _this.profile = profile; });
     }
     NavbarComponent.prototype.ngOnInit = function () {
+        // this.nicknameSub = this.auth.getNickName().subscribe( (nick:string)=>{
+        //   this.username=nick;
+        // });
         var _this = this;
         if (this.auth.isAuthenticated()) {
-            this.username = this.auth.getProfile().nickname;
+            this.profile = this.auth.getProfile();
+            this.username = this.profile.nickname;
         }
         this.subscription = this.searchBox
             .valueChanges
@@ -617,7 +659,13 @@ var NavbarComponent = /** @class */ (function () {
         // this.router.navigate([`/board/${this.sessionId}`]);
     };
     NavbarComponent.prototype.login = function () {
-        this.auth.login();
+        var _this = this;
+        this.auth.login()
+            .then(function (p) {
+            _this.profile = p;
+            //console.log("p=" + p);
+            _this.username = _this.profile.user_metadata.nickname;
+        });
     };
     NavbarComponent.prototype.logout = function () {
         this.auth.logout();
@@ -909,7 +957,7 @@ module.exports = ".portrait {\n  height : 150px;\n}\n\n.profile-username {\n  te
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <ul class=\"nav nav-tabs\">\n    <li class=\"active\"><a data-toggle=\"tab\" href=\"#profile\">Profile</a></li>\n    <li><a data-toggle=\"tab\" href=\"#password\">Change Password</a></li>\n  </ul>\n\n  <hr>\n\n  <div class=\"tab-content\">\n    <div id=\"profile\" class=\"tab-pane fade in active\">\n      <h3>Profile</h3>\n\n      <div class=\"form-group\">\n        <label for=\"username\">Username</label>\n        <input type=\"text\" class=\"form-control\" id=\"username\" name=\"username\"\n        disabled value={{username}}>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"email\">Email</label>\n        <input type=\"text\" class=\"form-control\" id=\"email\" name=\"email\"\n        disabled value={{email}}>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"login\">Last Login</label>\n        <input type=\"text\" class=\"form-control\" id=\"login\" name=\"login\"\n        disabled value={{login_time}}>\n      </div>\n\n    </div>\n\n    <div id=\"password\" class=\"tab-pane fade\">\n      <h3>Change Password</h3>\n      <div class=\"nav-form\">\n        <button type=\"button\" class=\"btn btn-large btn-success\" (click)=\"resetPassword()\">Reset password via email</button>\n      </div>\n    </div>\n\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad\" >\n\n             <div class=\"panel panel-primary\">\n            <div class=\"panel-heading\">\n              <h3 class=\"panel-title\">My Profile</h3>\n            </div>\n            <div class=\"panel-body\">\n              <div class=\"row\">\n\n                <div class=\"col-md-3 col-lg-3 \" align=\"center\">\n\n                  <div id=pic>\n                    <img alt=\"User Pic\" src={{picUrl}} class=\"img-circle img-responsive\">\n                  </div>\n\n                  <div id=role>\n                    <div class=\"label label-danger\" *ngIf=\"this.role=='admin'\">Admin</div>\n                    <div class=\"label label-info\" *ngIf=\"this.role!='admin'\">Free User</div>\n                  </div>\n\n                </div>\n\n                <div class=\" col-md-9 col-lg-9 \">\n                  <table class=\"table table-user-information\">\n                    <tbody>\n                      <tr>\n                        <td>Nickname:</td>\n                        <td>{{nickname}}</td>\n                      </tr>\n\n                      <tr>\n                        <td>Full Name</td>\n                        <td>{{name}}</td>\n                      </tr>\n\n                      <tr>\n                        <td>E-mail</td>\n                        <td>{{email}}</td>\n                      </tr>\n\n\n\n                        <tr>\n                        <td>Since</td>\n                        <td>{{created}}</td>\n                        </tr>\n\n                        <tr>\n                        <td>Last Login</td>\n                        <td>{{lastlogin}}</td>\n                        </tr>\n\n                        <tr>\n                        <td>Email Verified</td>\n                        <td>\n                        <div class=\"label label-success\" *ngIf=\"this.verified\">Yes</div>\n                        <div class=\"label label-danger\" *ngIf=\"!this.verified\">No</div>\n                        </td>\n                        </tr>\n                    </tbody>\n                  </table>\n\n                  <button class=\"btn btn-primary pull-right\" data-toggle=\"modal\" data-target=\"#cpwd\">Change Password</button>\n                  <!-- Modal -->\n                      <div id=\"cpwd\" class=\"modal fade\" role=\"dialog\">\n                        <div class=\"modal-dialog\">\n\n                          <!-- Modal content-->\n                          <div class=\"modal-content\">\n                            <div class=\"modal-header\">\n                              <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n                              <h4 class=\"modal-title\">Change Password</h4>\n                            </div>\n                            <div class=\"modal-body\">\n                              <p>1. Go to login page</p>\n                              <p>2. Click \"Don't remember your password?\"</p>\n                              <p>3. Check your mailbox and reset password</p>\n                            </div>\n                            <div class=\"modal-footer\">\n                              <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Close</button>\n                            </div>\n                          </div>\n\n                        </div>\n                      </div>\n\n\n                </div>\n              </div>\n            </div>\n                 <div class=\"panel-footer\">\n                        <a type=\"button\" href=\"mailto:yenhsuac@usc.edu\" class=\"btn btn-primary\" class=\"btn btn-sm btn-primary\"><span class=\"glyphicon glyphicon-envelope\"></span> Contact Author</a>\n                        <span class=\"pull-right\">\n\n                            <button class=\"btn btn-sm btn-warning\" data-toggle=\"modal\" data-target=\"#cnick\"><i class=\"glyphicon glyphicon-edit\"></i> Update</button>\n\n                            <!-- Modal -->\n                            <div id=\"cnick\" class=\"modal fade\" role=\"dialog\">\n                              <div class=\"modal-dialog\">\n\n                                <!-- Modal content-->\n                                <div class=\"modal-content\">\n                                  <div class=\"modal-header\">\n                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n                                    <h4 class=\"modal-title\">Change Nickname</h4>\n                                  </div>\n                                  <div class=\"modal-body\">\n                                      <div class=\"form-group\">\n                                        <label for=\"usr\">New Nickname:</label>\n                                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"newNick\">\n                                      </div>\n                                  </div>\n                                  <div class=\"modal-footer\">\n                                    <button type=\"button\" class=\"btn btn-success\" (click)=\"updateInfo()\" data-dismiss=\"modal\">Submit</button>\n                                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n                                  </div>\n                                </div>\n\n                              </div>\n                            </div>\n                        </span>\n                  </div>\n          </div>\n        </div>\n      </div>\n    </div>\n"
 
 /***/ }),
 
@@ -937,22 +985,42 @@ var __param = (undefined && undefined.__param) || function (paramIndex, decorato
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 
-//import { AuthService } from '../../services/auth.service';
 var ProfileComponent = /** @class */ (function () {
     function ProfileComponent(auth) {
         this.auth = auth;
-        this.email = '';
-        this.username = '';
-        this.login_time = '';
     }
     ProfileComponent.prototype.ngOnInit = function () {
-        this.profile = this.auth.getProfile();
-        this.email = this.profile.email;
-        this.username = this.profile.nickname;
-        this.login_time = this.profile.updated_at;
+        if (this.auth.authenticated()) {
+            this.readProfile();
+        }
     };
-    ProfileComponent.prototype.resetPassword = function () {
-        this.auth.resetPassword();
+    ProfileComponent.prototype.readProfile = function () {
+        this.profile = this.auth.getProfile();
+        console.log(this.profile);
+        this.nickname = this.profile.user_metadata.nickname;
+        this.newNick = this.nickname;
+        this.email = this.profile.email;
+        this.picUrl = this.profile.picture;
+        this.created = this.profile.created_at.substring(0, 10);
+        this.lastlogin = this.profile.updated_at.substring(0, 10);
+        this.role = 'Free User';
+        if (this.profile.roles.length != 0) {
+            this.role = this.profile.roles[0];
+        }
+        this.name = this.profile.user_metadata.full_name;
+        this.verified = (this.profile.email_verified);
+    };
+    ProfileComponent.prototype.updateInfo = function () {
+        var _this = this;
+        var data = JSON.stringify({ user_metadata: { nickname: this.newNick, full_name: this.name } });
+        this.auth.updateInfo(data)
+            .then(function (p) {
+            var tmp = JSON.parse(p);
+            _this.profile.user_metadata.nickname = tmp['user_metadata'].nickname;
+            localStorage.setItem('profile', JSON.stringify(_this.profile));
+            _this.auth.sendNickName(tmp['user_metadata'].nickname);
+            _this.readProfile();
+        });
     };
     ProfileComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -960,7 +1028,7 @@ var ProfileComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./profile.component.html */ "./src/app/components/profile/profile.component.html"),
             styles: [__webpack_require__(/*! ./profile.component.css */ "./src/app/components/profile/profile.component.css")]
         }),
-        __param(0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])("auth")),
+        __param(0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])('authV2')),
         __metadata("design:paramtypes", [Object])
     ], ProfileComponent);
     return ProfileComponent;
@@ -1063,6 +1131,143 @@ var AuthGuardService = /** @class */ (function () {
         __metadata("design:paramtypes", [Object, _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], AuthGuardService);
     return AuthGuardService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/auth-v2.service.ts":
+/*!*********************************************!*\
+  !*** ./src/app/services/auth-v2.service.ts ***!
+  \*********************************************/
+/*! exports provided: AuthV2Service */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthV2Service", function() { return AuthV2Service; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var angular2_jwt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! angular2-jwt */ "./node_modules/angular2-jwt/angular2-jwt.js");
+/* harmony import */ var angular2_jwt__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(angular2_jwt__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs_Rx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/Rx */ "./node_modules/rxjs-compat/_esm5/Rx.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+// Auth0 Setting
+var options = {
+    theme: {
+        logo: '../../assets/mylogo.png',
+        primaryColor: '#2b2b2b'
+    },
+    languageDictionary: {
+        title: "Log in"
+    },
+    rememberLastLogin: false,
+    popupOptions: { width: 30, height: 40, left: 30, top: 30 },
+    redirect: false,
+    auth: {
+        redirect: false,
+        sso: false,
+        responseType: 'token',
+        params: {
+            scope: 'openid'
+        },
+    },
+    additionalSignUpFields: [{
+            name: "nickname",
+            placeholder: "Enter your nickname"
+        },
+        {
+            name: "full_name",
+            placeholder: "Enter your full name"
+        }]
+};
+var AuthV2Service = /** @class */ (function () {
+    function AuthV2Service(router, http) {
+        this.router = router;
+        this.http = http;
+        // Configure Auth0
+        this.clientId = '8ISBVQwZmgTAz_FaNa_yT19ufKDN7bU4';
+        this.domain = 'horis.auth0.com';
+        this.lock = new Auth0Lock(this.clientId, this.domain, options);
+        this.nickname = new rxjs_Rx__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"]("");
+    }
+    AuthV2Service.prototype.login = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.lock.on("authenticated", function (authResult) {
+                _this.lock.getUserInfo(authResult.accessToken, function (error, profile) {
+                    if (error) {
+                        console.log(error);
+                        return;
+                    }
+                    localStorage.setItem('accessToken', authResult.accessToken);
+                    localStorage.setItem('id_token', authResult.idToken);
+                    localStorage.setItem('profile', JSON.stringify(profile));
+                    _this.profile = profile;
+                    //console.log('here');
+                    resolve(profile);
+                    //this.router.navigate(['/ugihuih']);
+                    setTimeout(function () { _this.lock.hide(); }, 1300);
+                });
+            });
+            _this.lock.show();
+        });
+    };
+    AuthV2Service.prototype.getNickName = function () {
+        return this.nickname.asObservable();
+    };
+    AuthV2Service.prototype.sendNickName = function (nick) {
+        this.nickname.next(nick);
+    };
+    AuthV2Service.prototype.isAuthenticated = function () {
+        // const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+        // return localStorage.getItem('profile') && new Date().getTime() < expiresAt;
+        return Object(angular2_jwt__WEBPACK_IMPORTED_MODULE_1__["tokenNotExpired"])('id_token');
+    };
+    AuthV2Service.prototype.logout = function () {
+        // Remove token from localStorage
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('profile');
+        //localStorage.removeItem('expires_at');
+        localStorage.removeItem('id_token');
+        this.router.navigate(['/']);
+    };
+    AuthV2Service.prototype.getProfile = function () {
+        return JSON.parse(localStorage.getItem('profile'));
+    };
+    AuthV2Service.prototype.updateInfo = function (info) {
+        var header = new _angular_http__WEBPACK_IMPORTED_MODULE_4__["Headers"]();
+        header.append('content-type', 'application/json');
+        header.append('Accept', 'application/json');
+        header.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
+        var url = 'https://' + 'horis.auth0.com' + '/api/v2/users/' + this.getProfile()['user_id'];
+        //console.log(url);
+        return this.http.patch(url, info, { headers: header })
+            .toPromise()
+            .then(function (response) {
+            return response['_body'];
+        });
+    };
+    AuthV2Service = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_http__WEBPACK_IMPORTED_MODULE_4__["Http"]])
+    ], AuthV2Service);
+    return AuthV2Service;
 }());
 
 
@@ -1220,8 +1425,9 @@ var AuthService = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CollaborationService", function() { return CollaborationService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _assets_colors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/colors */ "./src/assets/colors.ts");
+/* harmony import */ var _assets_colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/colors */ "./src/assets/colors.ts");
+/* harmony import */ var rxjs_Rx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/Rx */ "./node_modules/rxjs-compat/_esm5/Rx.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1233,20 +1439,25 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var CollaborationService = /** @class */ (function () {
     function CollaborationService() {
         this.clientsInfo = {};
         this.clientNum = 0;
+        this.roomUserNum = new rxjs_Rx__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]("1");
     }
     CollaborationService.prototype.init = function (editor, sessionId) {
         var _this = this;
-        this.collaborationSocket = io(window.location.origin, { query: 'sessionId' + sessionId });
+        // Build socket
+        this.collaborationSocket = io(window.location.origin, { query: "sessionId=" + sessionId });
+        // Listen changes
         this.collaborationSocket.on("change", function (delta) {
             console.log('collaboration: editor changes by' + delta);
             delta = JSON.parse(delta);
             editor.lastAppliedChange = delta;
             editor.getSession().getDocument().applyDeltas([delta]);
         });
+        // Listen cursor move
         this.collaborationSocket.on("cursorMove", function (cursor) {
             console.log("cursor move:" + cursor);
             var session = editor.getSession();
@@ -1263,14 +1474,18 @@ var CollaborationService = /** @class */ (function () {
                 var css = document.createElement("style");
                 css.type = "text/css";
                 css.innerHTML = ".editor_cursor_" + changeClientId
-                    + " { position:absolute; background:" + _assets_colors__WEBPACK_IMPORTED_MODULE_1__["COLORS"][_this.clientNum] + ";"
-                    + " z-index: 100; width:2px !important; }";
+                    + " { position:absolute; background:" + _assets_colors__WEBPACK_IMPORTED_MODULE_0__["COLORS"][_this.clientNum] + ";"
+                    + " z-index: 100; width:3px !important; }";
                 document.body.appendChild(css);
                 _this.clientNum++;
             }
             var Range = ace.require('ace/range').Range;
             var newMarker = session.addMarker(new Range(x, y, x, y + 2), 'editor_cursor_' + changeClientId, true);
             _this.clientsInfo[changeClientId]['marker'] = newMarker;
+        });
+        this.collaborationSocket.on('userNum', function (num) {
+            _this.roomUserNum.next(num);
+            console.log(num + ' user(s) in the room');
         });
         this.collaborationSocket.on('message', function (message) {
             console.log('received ' + message);
@@ -1285,8 +1500,17 @@ var CollaborationService = /** @class */ (function () {
     CollaborationService.prototype.restoreBuffer = function () {
         this.collaborationSocket.emit("restoreBuffer");
     };
+    CollaborationService.prototype.getRoomUserNum = function () {
+        return this.roomUserNum.asObservable();
+    };
+    CollaborationService.prototype.disconnect = function () {
+        this.collaborationSocket.disconnect();
+    };
+    CollaborationService.prototype.loadContents = function () {
+        this.collaborationSocket.emit('getContent');
+    };
     CollaborationService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
         __metadata("design:paramtypes", [])
     ], CollaborationService);
     return CollaborationService;

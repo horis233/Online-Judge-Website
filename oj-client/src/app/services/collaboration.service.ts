@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
 import { COLORS } from '../../assets/colors';
+import { BehaviorSubject, Observable } from 'rxjs/Rx';
+import { Injectable } from '@angular/core';
 
 declare var io: any;
 declare var ace: any;
@@ -11,11 +12,16 @@ export class CollaborationService {
   clientsInfo : Object = {};
   clientNum: number = 0;
 
+  roomUserNum = new BehaviorSubject<string>("1");
+
   constructor() { }
 
   init(editor: any, sessionId: string): void {
-    this.collaborationSocket = io(window.location.origin, {query: 'sessionId' + sessionId});
 
+    // Build socket
+    this.collaborationSocket = io(window.location.origin, {query: `sessionId=${sessionId}`});
+
+    // Listen changes
     this.collaborationSocket.on("change", (delta: string)=> {
       console.log('collaboration: editor changes by' + delta);
       delta = JSON.parse(delta);
@@ -23,6 +29,7 @@ export class CollaborationService {
       editor.getSession().getDocument().applyDeltas([delta]);
     })
 
+    // Listen cursor move
     this.collaborationSocket.on("cursorMove", (cursor) => {
       console.log("cursor move:" + cursor);
       let session = editor.getSession();
@@ -41,7 +48,7 @@ export class CollaborationService {
         css.type = "text/css";
         css.innerHTML = ".editor_cursor_" + changeClientId
             + " { position:absolute; background:" + COLORS[this.clientNum] + ";"
-            + " z-index: 100; width:2px !important; }";
+            + " z-index: 100; width:3px !important; }";
         document.body.appendChild(css);
         this.clientNum++;
       }
@@ -51,10 +58,21 @@ export class CollaborationService {
       this.clientsInfo[changeClientId]['marker'] = newMarker;
     });
 
+    this.collaborationSocket.on('userNum', (num:string)=>{
+      this.roomUserNum.next(num);
+      console.log(num+' user(s) in the room');
+    });
+
     this.collaborationSocket.on('message', (message) => {
       console.log('received ' + message);
-    })
+    });
+
   }
+
+
+
+
+
 
   change(delta: string) {
     this.collaborationSocket.emit("change", delta);
@@ -68,4 +86,15 @@ export class CollaborationService {
     this.collaborationSocket.emit("restoreBuffer");
   }
 
+  getRoomUserNum() {
+    return this.roomUserNum.asObservable();
+  }
+
+  disconnect():void {
+    this.collaborationSocket.disconnect();
+  }
+
+  loadContents():void {
+    this.collaborationSocket.emit('getContent');
+  }
 }

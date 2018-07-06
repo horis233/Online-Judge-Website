@@ -1,0 +1,13 @@
+img {
+	width:100%;
+}
+
+.jumbotron {
+	color:white;
+	background-color: #d86a5f;
+}
+
+.btn{
+  background-color: #81C7D4;
+  color: white;
+}

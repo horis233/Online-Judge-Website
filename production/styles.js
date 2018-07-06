@@ -48,7 +48,7 @@ module.exports = "/*!\n * Bootstrap v3.3.7 (http://getbootstrap.com)\n * Copyrig
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/* You can add global styles to this file, and also import other style files */\n"
+module.exports = "/* You can add global styles to this file, and also import other style files */\n.loader {\n    border: 16px solid #f3f3f3; /* Light grey */\n    border-top: 16px solid #3498db; /* Blue */\n    border-radius: 50%;\n    width: 120px;\n    height: 120px;\n    -webkit-animation: spin 2s linear infinite;\n            animation: spin 2s linear infinite;\n    margin: auto;\n    margin-top: 25%;\n}\n"
 
 /***/ }),
 

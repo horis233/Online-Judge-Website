@@ -1,9 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { DataService } from './../../services/data.service';
+import { Subscription} from 'rxjs/Subscription';
 
 
 declare var ace: any;
+declare var jQuery:any;
 
 @Component({
   selector: 'app-editor',
@@ -12,12 +14,27 @@ declare var ace: any;
 })
 export class EditorComponent implements OnInit {
 
+
+  randomSID:string="1";
+	joinSID:string="";
+
+	validJoinSID:boolean=false;
+	redirectProblemMsg:boolean=false;
+
+	numUsersSub:Subscription;
+	numUsers:string="1";
+
+
+
+
   editor: any;
 
   language: string = 'Java';
 
   languages: string[] = ['Java', 'Python'];
   sessionId: string;
+
+
   defaultContent = {
     'Java': `public class Example {
 public static void main(String[] args) {
@@ -29,17 +46,20 @@ public static void main(String[] args) {
        # Write your Python code here`
   }
   output: string = '';
+
   constructor(@Inject('collaboration') private collaboration,
               @Inject('data') private dataService,
-              private route: ActivatedRoute,) { }
+              @Inject('auth') private auth,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      // this.problem = this.data.getProblem(+params['id']);
-      this.sessionId = params['id'];
-      this.initEditor();
-      this.collaboration.restoreBuffer();
+
+    // this.collaboration.restoreBuffer();
+    this.numUsersSub = this.collaboration.getRoomUserNum().subscribe((num:string)=>{
+      console.log(num);
+      this.numUsers=num;
     });
+    this.initEditor();
   }
 
   initEditor(): void {
@@ -50,11 +70,11 @@ public static void main(String[] args) {
     this.editor.setFontSize(18);
     this.resetEditor();
 
+    this.generateRandomSessionId();
+    this.sessionId=this.randomSID;
+
     this.editor.$blockScrolling = Infinity;
 
-    // this.editor.getSession().setMode('ace/mode/java');
-    // this.editor.setValue(this.defaultContent['Java']);
-    this.resetEditor();
     this.collaboration.init(this.editor, this.sessionId);
     this.editor.lastAppliedChange = null;
 
@@ -73,7 +93,8 @@ public static void main(String[] args) {
       this.collaboration.cursorMove(JSON.stringify(cursor));
     });
 
-    this.collaboration.restoreBuffer();
+    //this.collaboration.restoreBuffer();
+    this.collaboration.loadContents();
   }
 
   resetEditor(): void {
@@ -84,10 +105,50 @@ public static void main(String[] args) {
 
   setLanguage(language: string) {
     this.language = language;
-    // add a map for language and js file name
-    // this.editor.getSession().setMode(`ace/mode/${language.toLowerCase()}`);
-    // this.editor.setValue(this.defaultContent[language]);
     this.resetEditor();
+  }
+
+  generateRandomSessionId():void {
+  	this.route.params.subscribe(input => {
+	    const nickname = this.auth.getProfile().nickname;
+	    this.randomSID = input["id"]+'-'+nickname + Math.floor((Math.random() * 10000) + 10000);
+	 	console.log(this.randomSID);
+  	});
+  }
+
+  joinRoom():void {
+  	this.collaboration.disconnect();
+  	this.resetEditor();
+	  this.sessionId=this.joinSID;
+	  this.randomSID=this.joinSID;
+    this.collaboration.init(this.editor,this.sessionId);
+    this.editor.lastAppliedChange = null;
+    this.collaboration.loadContents();
+  }
+
+  checkJoinSID():void {
+  	console.log(this.joinSID.match(/\d+-\w+\d+/));
+
+  	this.route.params.subscribe(input => {
+
+	  	if (this.joinSID.match(/\d+-\w+\d+/g)) {
+	  		let hidx= this.joinSID.indexOf('-');
+	  		let pid=this.joinSID.substring(0,hidx);
+
+	  		console.log(pid+' '+input["id"]);
+	  		if (pid==input["id"]) {
+	  			this.validJoinSID=true;
+	  			this.redirectProblemMsg=false;
+	  		}
+	  		else {
+	  			this.validJoinSID=false;
+	  			this.redirectProblemMsg=true;
+	  		}
+	  	} else {
+	  			this.validJoinSID=false;
+	  			this.redirectProblemMsg=false;
+	  	}
+  	});
   }
 
   submit() {
@@ -99,6 +160,9 @@ public static void main(String[] args) {
     };
 
     this.dataService.buildAndRun(data)
-      .then(res => this.output = res.text);
+      .then(res => {
+        this.output = res.text;
+        jQuery('#submitBtn').button('reset');
+      });
   }
 }

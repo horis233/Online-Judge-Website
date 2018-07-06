@@ -20,23 +20,27 @@ export class NavbarComponent implements OnInit {
   profile: any;
   username = "" ;
   searchBox: FormControl = new FormControl();
-  subscription: Subscription;
+  nicknameSub:Subscription;
+  subscription:Subscription
 
 
 
 
   constructor(@Inject ("auth") private auth,
               @Inject('input') private  input,
-              private router: Router ) {
-                this.auth.userProfile.subscribe(
-                  profile => this.profile = profile
-                );
-               }
+              private router: Router ) {}
 
   ngOnInit() {
+
+    // this.nicknameSub = this.auth.getNickName().subscribe( (nick:string)=>{
+    //   this.username=nick;
+    // });
+
     if(this.auth.isAuthenticated()){
-      this.username = this.auth.getProfile().nickname;
+      this.profile=this.auth.getProfile();
+  	  this.username=this.profile.nickname;
     }
+
     this.subscription = this.searchBox
                             .valueChanges
                             .debounceTime(200)
@@ -53,8 +57,12 @@ export class NavbarComponent implements OnInit {
 
 
   login() {
-    this.auth.login();
-
+    this.auth.login()
+    .then(p=>{
+      this.profile=p;
+      //console.log("p=" + p);
+      this.username=this.profile.user_metadata.nickname;
+    });
   }
 
   logout() {

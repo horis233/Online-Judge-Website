@@ -14,16 +14,18 @@ import { EditorComponent } from './components/editor/editor.component';
 import { NewProblemComponent } from './components/new-problem/new-problem.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { LoadingComponent } from './components/loading/loading.component';
 import { FootbarComponent } from './components/footbar/footbar.component';
+import { HomeComponent } from './components/home/home.component';
 
 import { SearchPipe } from './pipes/search.pipe';
 
 import { DataService } from 'app/services/data.service';
 import { AuthService } from 'app/services/auth.service';
+import { AuthV2Service} from './services/auth-v2.service';
 import { AuthGuardService } from "./services/auth-guard.service";
 import { CollaborationService } from './services/collaboration.service';
 import { InputService } from './services/input.service';
+
 
 @NgModule({
   declarations: [
@@ -34,9 +36,9 @@ import { InputService } from './services/input.service';
     NavbarComponent,
     ProfileComponent,
     EditorComponent,
-    LoadingComponent,
     FootbarComponent,
-    SearchPipe
+    SearchPipe,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,10 @@ import { InputService } from './services/input.service';
     {
       provide:'auth',
       useClass: AuthService
+    },
+    {
+      provide: 'authV2',
+      useClass: AuthV2Service
     },
     {
       provide: 'authGuard',
