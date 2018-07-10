@@ -44,12 +44,14 @@ router.post('/build_and_run', jsonParser, (req, res) => {
            data: {code: userCodes, lang: lang},
            headers: { 'Content-Type': 'application/json'}
        },
-       (data, response) => {
+       (result, response) => {
            // build: xxx ; run: xxx
-           console.log("Recieved response from execution server: "+ response);
-           const text = `Build output: ${data['build']}. Execute Output: ${data['run']}`;
-           data['text'] = text;
-           res.json(data);
+           console.log(`Execution: ${JSON.stringify(result)}`);
+           let text = `Build results: ${result['build']} Execute output: ${result['run']}`;
+    			 result['build'] = result['build'];
+  			   result['run'] = result['run'];
+           result['text'] = text;
+           res.json(result);
        }
    );
 });

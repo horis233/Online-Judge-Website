@@ -21,7 +21,6 @@ import { SearchPipe } from './pipes/search.pipe';
 
 import { DataService } from 'app/services/data.service';
 import { AuthService } from 'app/services/auth.service';
-import { AuthV2Service} from './services/auth-v2.service';
 import { AuthGuardService } from "./services/auth-guard.service";
 import { CollaborationService } from './services/collaboration.service';
 import { InputService } from './services/input.service';
@@ -56,10 +55,6 @@ import { InputService } from './services/input.service';
     {
       provide:'auth',
       useClass: AuthService
-    },
-    {
-      provide: 'authV2',
-      useClass: AuthV2Service
     },
     {
       provide: 'authGuard',

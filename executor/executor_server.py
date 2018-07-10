@@ -8,7 +8,7 @@ import executor_utils as eu
 
 @app.route('/')
 def hello():
-    return 'hello world'
+    return 'Flask web server works'
 
 @app.route('/build_and_run', methods=['POST'])
 def build_and_run():
@@ -25,5 +25,5 @@ def build_and_run():
 if __name__ == '__main__':
     eu.load_image()
     #app.run(debug=True)
-    port = int(sys.argv[1])
-    app.run(port = port)
+    #port = int(sys.argv[1])
+    app.run(debug = True)

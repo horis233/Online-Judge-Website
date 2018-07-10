@@ -24,28 +24,29 @@ export class EditorComponent implements OnInit {
 	numUsersSub:Subscription;
 	numUsers:string="1";
 
-
-
-
   editor: any;
 
   language: string = 'Java';
 
-  languages: string[] = ['Java', 'Python'];
+  languages: string[] = ['Java', 'Python', 'C++'];
   sessionId: string;
-
 
   defaultContent = {
     'Java': `public class Example {
-public static void main(String[] args) {
+    public static void main(String[] args) {
     // Type your Java code here
     }
 }`,
     'Python': `class Solution:
    def example():
-       # Write your Python code here`
-  }
-  output: string = '';
+      print('Hello World!')`,
+  'C++': `#include <iostream>
+  using namespace std;
+  int main() {
+    // Type your C++ code here
+    return 0;
+  }`};
+  output: object;
 
   constructor(@Inject('collaboration') private collaboration,
               @Inject('data') private dataService,
@@ -157,10 +158,11 @@ public static void main(String[] args) {
       userCodes: userCodes,
       lang: this.language.toLocaleLowerCase()
     };
-
+    jQuery('#submitBtn').button('loading');
     this.dataService.buildAndRun(data)
       .then(res => {
-        this.output = res.text;
+        this.output = res;
+        console.log(res);
         jQuery('#submitBtn').button('reset');
       });
   }

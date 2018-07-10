@@ -1,128 +1,42 @@
 <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad" >
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
+    <li><a data-toggle="tab" href="#password">Change Password</a></li>
+  </ul>
 
-             <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">My Profile</h3>
-            </div>
-            <div class="panel-body">
-              <div class="row">
+  <hr>
 
-                <div class="col-md-3 col-lg-3 " align="center">
+  <div class="tab-content">
+    <div id="profile" class="tab-pane fade in active">
+      <h3>Profile</h3>
 
-                  <div id=pic>
-                    <img alt="User Pic" src={{picUrl}} class="img-circle img-responsive">
-                  </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username"
+        disabled value={{username}}>
+      </div>
 
-                  <div id=role>
-                    <div class="label label-danger" *ngIf="this.role=='admin'">Admin</div>
-                    <div class="label label-info" *ngIf="this.role!='admin'">Free User</div>
-                  </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" name="email"
+        disabled value={{email}}>
+      </div>
 
-                </div>
+      <div class="form-group">
+        <label for="login">Last Login</label>
+        <input type="text" class="form-control" id="login" name="login"
+        disabled value={{login_time}}>
+      </div>
 
-                <div class=" col-md-9 col-lg-9 ">
-                  <table class="table table-user-information">
-                    <tbody>
-                      <tr>
-                        <td>Nickname:</td>
-                        <td>{{nickname}}</td>
-                      </tr>
+    </div>
 
-                      <tr>
-                        <td>Full Name</td>
-                        <td>{{name}}</td>
-                      </tr>
-
-                      <tr>
-                        <td>E-mail</td>
-                        <td>{{email}}</td>
-                      </tr>
-
-
-
-                        <tr>
-                        <td>Since</td>
-                        <td>{{created}}</td>
-                        </tr>
-
-                        <tr>
-                        <td>Last Login</td>
-                        <td>{{lastlogin}}</td>
-                        </tr>
-
-                        <tr>
-                        <td>Email Verified</td>
-                        <td>
-                        <div class="label label-success" *ngIf="this.verified">Yes</div>
-                        <div class="label label-danger" *ngIf="!this.verified">No</div>
-                        </td>
-                        </tr>
-                    </tbody>
-                  </table>
-
-                  <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#cpwd">Change Password</button>
-                  <!-- Modal -->
-                      <div id="cpwd" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-
-                          <!-- Modal content-->
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              <h4 class="modal-title">Change Password</h4>
-                            </div>
-                            <div class="modal-body">
-                              <p>1. Go to login page</p>
-                              <p>2. Click "Don't remember your password?"</p>
-                              <p>3. Check your mailbox and reset password</p>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                            </div>
-                          </div>
-
-                        </div>
-                      </div>
-
-
-                </div>
-              </div>
-            </div>
-                 <div class="panel-footer">
-                        <a type="button" href="mailto:yenhsuac@usc.edu" class="btn btn-primary" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Contact Author</a>
-                        <span class="pull-right">
-
-                            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#cnick"><i class="glyphicon glyphicon-edit"></i> Update</button>
-
-                            <!-- Modal -->
-                            <div id="cnick" class="modal fade" role="dialog">
-                              <div class="modal-dialog">
-
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Change Nickname</h4>
-                                  </div>
-                                  <div class="modal-body">
-                                      <div class="form-group">
-                                        <label for="usr">New Nickname:</label>
-                                        <input type="text" class="form-control" [(ngModel)]="newNick">
-                                      </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" (click)="updateInfo()" data-dismiss="modal">Submit</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                  </div>
-                                </div>
-
-                              </div>
-                            </div>
-                        </span>
-                  </div>
-          </div>
-        </div>
+    <div id="password" class="tab-pane fade">
+      <h3>Change Password</h3>
+      <div class="nav-form">
+        <button type="button" class="btn btn-large btn-success" (click)="resetPassword()">Reset password via email</button>
       </div>
     </div>
+    <br>
+
+  </div>
+</div>

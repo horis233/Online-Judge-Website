@@ -119,13 +119,29 @@
   <div class="row">
     <div id="editor"></div>
     <div>
-        {{output}}
+      <div>
+        <div class="alert alert-success" *ngIf="output && output.build && output.build=='Compiled successfully'">
+            <strong>Build:</strong> {{output.build}}
+        </div>
+        <div class="alert alert-danger" *ngIf="output && output.build && output.build!='Compiled successfully'">
+            <strong>Build:</strong> {{output.build}}
+        </div>
+        <div class="panel panel-default" *ngIf="output && output.build && output.build=='Compiled successfully'">
+            <div class="panel-heading">Your Results</div>
+            <div class="panel-body">
+            Console output: <br>
+            <div class="well">{{output.run}}</div>
+            </div>
+        </div>
+      </div>
     </div>
   </div>
   <br>
   <footer class="editor-footer">
-    <button type="button" class="btn btn-success pull-right" (click)="submit()">
+    <button type="button" id="submitBtn" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Compiling" class="btn btn-success pull-right" (click)="submit()">
       Submit Solution
     </button>
+  <br>
   </footer>
+  <br>
 </section>

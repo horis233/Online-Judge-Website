@@ -55,7 +55,7 @@ export class DataService {
     .toPromise()
     .then((res: Response) => {
       console.log(res);
-      return res;
+      return (res);
     })
     .catch((error:any) => {
       return JSON.stringify(error);

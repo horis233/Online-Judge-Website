@@ -119,17 +119,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pipes_search_pipe__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pipes/search.pipe */ "./src/app/pipes/search.pipe.ts");
 /* harmony import */ var app_services_data_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! app/services/data.service */ "./src/app/services/data.service.ts");
 /* harmony import */ var app_services_auth_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! app/services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var _services_auth_v2_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/auth-v2.service */ "./src/app/services/auth-v2.service.ts");
-/* harmony import */ var _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./services/auth-guard.service */ "./src/app/services/auth-guard.service.ts");
-/* harmony import */ var _services_collaboration_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./services/collaboration.service */ "./src/app/services/collaboration.service.ts");
-/* harmony import */ var _services_input_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./services/input.service */ "./src/app/services/input.service.ts");
+/* harmony import */ var _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/auth-guard.service */ "./src/app/services/auth-guard.service.ts");
+/* harmony import */ var _services_collaboration_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./services/collaboration.service */ "./src/app/services/collaboration.service.ts");
+/* harmony import */ var _services_input_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./services/input.service */ "./src/app/services/input.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -187,20 +185,16 @@ var AppModule = /** @class */ (function () {
                     useClass: app_services_auth_service__WEBPACK_IMPORTED_MODULE_17__["AuthService"]
                 },
                 {
-                    provide: 'authV2',
-                    useClass: _services_auth_v2_service__WEBPACK_IMPORTED_MODULE_18__["AuthV2Service"]
-                },
-                {
                     provide: 'authGuard',
-                    useClass: _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_19__["AuthGuardService"]
+                    useClass: _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_18__["AuthGuardService"]
                 },
                 {
                     provide: 'collaboration',
-                    useClass: _services_collaboration_service__WEBPACK_IMPORTED_MODULE_20__["CollaborationService"]
+                    useClass: _services_collaboration_service__WEBPACK_IMPORTED_MODULE_19__["CollaborationService"]
                 },
                 {
                     provide: "input",
-                    useClass: _services_input_service__WEBPACK_IMPORTED_MODULE_21__["InputService"]
+                    useClass: _services_input_service__WEBPACK_IMPORTED_MODULE_20__["InputService"]
                 }
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
@@ -226,8 +220,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _components_problem_list_problem_list_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/problem-list/problem-list.component */ "./src/app/components/problem-list/problem-list.component.ts");
 /* harmony import */ var _components_problem_detail_problem_detail_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/problem-detail/problem-detail.component */ "./src/app/components/problem-detail/problem-detail.component.ts");
-/* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/profile/profile.component */ "./src/app/components/profile/profile.component.ts");
-/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
+/* harmony import */ var _components_new_problem_new_problem_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/new-problem/new-problem.component */ "./src/app/components/new-problem/new-problem.component.ts");
+/* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/profile/profile.component */ "./src/app/components/profile/profile.component.ts");
+/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
+
 
 
 
@@ -241,7 +237,7 @@ var routes = [
     },
     {
         path: 'home',
-        component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"]
+        component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]
     },
     {
         path: 'problems',
@@ -252,12 +248,16 @@ var routes = [
         component: _components_problem_detail_problem_detail_component__WEBPACK_IMPORTED_MODULE_2__["ProblemDetailComponent"],
     },
     {
+        path: 'newproblems',
+        component: _components_new_problem_new_problem_component__WEBPACK_IMPORTED_MODULE_3__["NewProblemComponent"],
+    },
+    {
         path: 'profile',
-        component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_3__["ProfileComponent"],
+        component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_4__["ProfileComponent"],
     },
     {
         path: '**',
-        redirectTo: 'home'
+        redirectTo: 'problems'
     }
 ];
 var routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forRoot(routes);
@@ -283,7 +283,7 @@ module.exports = "@media screen {\n #editor {\n   height: 600px;\n }\n .lang-sel
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n  <header>\n    <select class=\"form-control pull-left lang-select\" id=\"language\"\n        name=\"language\"\n        [(ngModel)]=\"language\"\n        (change)=\"setLanguage(language)\">\n       <option *ngFor=\"let language of languages\"\n       [value]=\"language\">\n         {{language}}\n       </option>\n    </select>\n\n    <button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#myModal\">\n      <span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span>\n    </button>\n\n\n\n\n    <div class=\"col-sm-7 pull-right\">\n      <div class=\"btn-group  pull-right\">\n      <button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#join\">\n        <span class=\"glyphicon glyphicon-plus\"></span>Join\n      </button>\n      <button id=\"invite\" type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#invitepop\">\n        <span class=\"glyphicon glyphicon-envelope\"></span> Invite\n      </button>\n      <button type=\"button\" class=\"btn btn-default\" *ngIf=\"numUsers=='1'\">\n      <span class=\"glyphicon glyphicon-user\"></span> {{numUsers}}\n      </button>\n      <button type=\"button\" class=\"btn btn-default\" *ngIf=\"numUsers!='1'\">\n      <span class=\"glyphicon glyphicon-user\" style=\"color: #ffaa00\"></span> {{numUsers}}\n      </button>\n      </div>\n    </div>\n\n    <!-- Modal -->\n          <div id=\"invitepop\" class=\"modal fade\" role=\"dialog\">\n            <div class=\"modal-dialog\">\n\n              <!-- Modal content-->\n              <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                  <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n                  <h4 class=\"modal-title\">Invite your friend with this code</h4>\n                </div>\n                <div class=\"modal-body\">\n\n                  <div class=\"alert alert-success\" role=\"success\">\n                    <span class=\"glyphicon glyphicon-ok pull-right\" aria-hidden=\"true\"></span>{{randomSID}}\n                  </div>\n\n\n                </div>\n                <div class=\"modal-footer\">\n                  <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Close</button>\n                </div>\n              </div>\n\n            </div>\n          </div>\n\n\n          <!-- Modal -->\n          <div id=\"join\" class=\"modal fade\" role=\"dialog\">\n            <div class=\"modal-dialog\">\n              <!-- Modal content-->\n              <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                  <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n                  <h4 class=\"modal-title\">Enter Invited Code</h4>\n                </div>\n                <div class=\"modal-body\">\n                    <div class=\"form-group\">\n                      <label for=\"usr\">Invited Code</label>\n                      <input type=\"text\" class=\"form-control\" [(ngModel)]=\"joinSID\" (ngModelChange)=\"checkJoinSID()\">\n                    </div>\n                    <div class=\"alert alert-warning\" *ngIf=\"redirectProblemMsg\">\n                      You are not doing the same problem with your friend(s).\n                      <span class=\"glyphicon glyphicon-info-sign pull-right\"></span>\n                    </div>\n                </div>\n                <div class=\"modal-footer\">\n                  <button type=\"button\" class=\"btn btn-success\" data-dismiss=\"modal\" (click)=\"joinRoom()\" [disabled]=\"!validJoinSID\">Join</button>\n                  <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Close</button>\n                </div>\n              </div>\n            </div>\n          </div>\n\n\n\n\n\n\n    <!-- Modal -->\n    <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n      <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n          <div class=\"modal-header\">\n            <h1 class=\"modal-title\" id=\"exampleModalLabel\">Reset?</h1>\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n              <span aria-hidden=\"true\">&times;</span>\n            </button>\n          </div>\n          <div class=\"modal-body\">\n              You will lose current code in the window, are you sure?\n          </div>\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n              (click)=\"resetEditor()\">Reset</button>\n            <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Cancel</button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </header>\n<br>\n  <div class=\"row\">\n    <div id=\"editor\"></div>\n    <div>\n        {{output}}\n    </div>\n  </div>\n  <br>\n  <footer class=\"editor-footer\">\n    <button type=\"button\" class=\"btn btn-success pull-right\" (click)=\"submit()\">\n      Submit Solution\n    </button>\n  </footer>\n</section>\n"
+module.exports = "<section>\n  <header>\n    <select class=\"form-control pull-left lang-select\" id=\"language\"\n        name=\"language\"\n        [(ngModel)]=\"language\"\n        (change)=\"setLanguage(language)\">\n       <option *ngFor=\"let language of languages\"\n       [value]=\"language\">\n         {{language}}\n       </option>\n    </select>\n\n    <button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#myModal\">\n      <span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span>\n    </button>\n\n\n\n\n    <div class=\"col-sm-7 pull-right\">\n      <div class=\"btn-group  pull-right\">\n      <button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#join\">\n        <span class=\"glyphicon glyphicon-plus\"></span>Join\n      </button>\n      <button id=\"invite\" type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#invitepop\">\n        <span class=\"glyphicon glyphicon-envelope\"></span> Invite\n      </button>\n      <button type=\"button\" class=\"btn btn-default\" *ngIf=\"numUsers=='1'\">\n      <span class=\"glyphicon glyphicon-user\"></span> {{numUsers}}\n      </button>\n      <button type=\"button\" class=\"btn btn-default\" *ngIf=\"numUsers!='1'\">\n      <span class=\"glyphicon glyphicon-user\" style=\"color: #ffaa00\"></span> {{numUsers}}\n      </button>\n      </div>\n    </div>\n\n    <!-- Modal -->\n          <div id=\"invitepop\" class=\"modal fade\" role=\"dialog\">\n            <div class=\"modal-dialog\">\n\n              <!-- Modal content-->\n              <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                  <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n                  <h4 class=\"modal-title\">Invite your friend with this code</h4>\n                </div>\n                <div class=\"modal-body\">\n\n                  <div class=\"alert alert-success\" role=\"success\">\n                    <span class=\"glyphicon glyphicon-ok pull-right\" aria-hidden=\"true\"></span>{{randomSID}}\n                  </div>\n\n\n                </div>\n                <div class=\"modal-footer\">\n                  <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Close</button>\n                </div>\n              </div>\n\n            </div>\n          </div>\n\n\n          <!-- Modal -->\n          <div id=\"join\" class=\"modal fade\" role=\"dialog\">\n            <div class=\"modal-dialog\">\n              <!-- Modal content-->\n              <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                  <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n                  <h4 class=\"modal-title\">Enter Invited Code</h4>\n                </div>\n                <div class=\"modal-body\">\n                    <div class=\"form-group\">\n                      <label for=\"usr\">Invited Code</label>\n                      <input type=\"text\" class=\"form-control\" [(ngModel)]=\"joinSID\" (ngModelChange)=\"checkJoinSID()\">\n                    </div>\n                    <div class=\"alert alert-warning\" *ngIf=\"redirectProblemMsg\">\n                      You are not doing the same problem with your friend(s).\n                      <span class=\"glyphicon glyphicon-info-sign pull-right\"></span>\n                    </div>\n                </div>\n                <div class=\"modal-footer\">\n                  <button type=\"button\" class=\"btn btn-success\" data-dismiss=\"modal\" (click)=\"joinRoom()\" [disabled]=\"!validJoinSID\">Join</button>\n                  <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Close</button>\n                </div>\n              </div>\n            </div>\n          </div>\n\n\n\n\n\n\n    <!-- Modal -->\n    <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n      <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n          <div class=\"modal-header\">\n            <h1 class=\"modal-title\" id=\"exampleModalLabel\">Reset?</h1>\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n              <span aria-hidden=\"true\">&times;</span>\n            </button>\n          </div>\n          <div class=\"modal-body\">\n              You will lose current code in the window, are you sure?\n          </div>\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n              (click)=\"resetEditor()\">Reset</button>\n            <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Cancel</button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </header>\n<br>\n  <div class=\"row\">\n    <div id=\"editor\"></div>\n    <div>\n      <div>\n        <div class=\"alert alert-success\" *ngIf=\"output && output.build && output.build=='Compiled successfully'\">\n            <strong>Build:</strong> {{output.build}}\n        </div>\n        <div class=\"alert alert-danger\" *ngIf=\"output && output.build && output.build!='Compiled successfully'\">\n            <strong>Build:</strong> {{output.build}}\n        </div>\n        <div class=\"panel panel-default\" *ngIf=\"output && output.build && output.build=='Compiled successfully'\">\n            <div class=\"panel-heading\">Your Results</div>\n            <div class=\"panel-body\">\n            Console output: <br>\n            <div class=\"well\">{{output.run}}</div>\n            </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <br>\n  <footer class=\"editor-footer\">\n    <button type=\"button\" id=\"submitBtn\" data-loading-text=\"<i class='fa fa-spinner fa-spin'></i> Compiling\" class=\"btn btn-success pull-right\" (click)=\"submit()\">\n      Submit Solution\n    </button>\n  <br>\n  </footer>\n  <br>\n</section>\n"
 
 /***/ }),
 
@@ -325,12 +325,12 @@ var EditorComponent = /** @class */ (function () {
         this.redirectProblemMsg = false;
         this.numUsers = "1";
         this.language = 'Java';
-        this.languages = ['Java', 'Python'];
+        this.languages = ['Java', 'Python', 'C++'];
         this.defaultContent = {
-            'Java': "public class Example {\npublic static void main(String[] args) {\n    // Type your Java code here\n    }\n}",
-            'Python': "class Solution:\n   def example():\n       # Write your Python code here"
+            'Java': "public class Example {\n    public static void main(String[] args) {\n    // Type your Java code here\n    }\n}",
+            'Python': "class Solution:\n   def example():\n      print('Hello World!')",
+            'C++': "#include <iostream>\n  using namespace std;\n  int main() {\n    // Type your C++ code here\n    return 0;\n  }"
         };
-        this.output = '';
     }
     EditorComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -425,9 +425,11 @@ var EditorComponent = /** @class */ (function () {
             userCodes: userCodes,
             lang: this.language.toLocaleLowerCase()
         };
+        jQuery('#submitBtn').button('loading');
         this.dataService.buildAndRun(data)
             .then(function (res) {
-            _this.output = res.text;
+            _this.output = res;
+            console.log(res);
             jQuery('#submitBtn').button('reset');
         });
     };
@@ -593,7 +595,7 @@ module.exports = "#username {\n  color: white;\n}\n.btn{\n  background-color: #8
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n    <div class=\"container-fluid\">\n      <!-- Brand and toggle get grouped for better mobile display -->\n      <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n        <a class=\"navbar-brand\" href=\"#\">{{title}}</a>\n      </div>\n\n      <!-- Collect the nav links, forms, and other content for toggling -->\n      <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n\n        <form class=\"navbar-form navbar-left\">\n          <div class=\"form-group\">\n            <input type=\"text\" class=\"form-control\" placeholder=\"Search Problem\" [formControl]=\"searchBox\">\n          </div>\n        </form>\n\n        <ul class=\"nav navbar-nav navbar-right\">\n          <li *ngIf=\"!auth.isAuthenticated()\">\n            <form class=\"navbar-form navbar-right\" >\n              <button type = \"button\" class=\"btn\"  (click)=\"login()\">Sign in</button>\n            </form>\n          </li>\n          <li class=\"dropdown\" *ngIf=\"auth.isAuthenticated()\">\n            <!-- <li class=\"main-logo\"><img ng-src=\"{{profile?.picture}}\"></li> -->\n            <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">{{username}} <span class=\"caret\"></span></a>\n            <ul class=\"dropdown-menu\">\n              <li><a routerLink=\"/profile\">My Profile</a></li>\n              <li role=\"separator\" class=\"divider\"></li>\n              <li><a href=\"#\" (click)='logout()'>Log Out</a></li>\n            </ul>\n          </li>\n        </ul>\n\n      </div>\n      <!-- /.navbar-collapse -->\n    </div>\n    <!-- /.container-fluid -->\n  </nav>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n    <div class=\"container-fluid\">\n      <!-- Brand and toggle get grouped for better mobile display -->\n      <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n        <a class=\"navbar-brand\" href=\"/problems\">{{title}}</a>\n      </div>\n\n\n\n      <!-- Collect the nav links, forms, and other content for toggling -->\n      <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n\n        <form class=\"navbar-form navbar-left\" *ngIf = \"router.url === '/problems'\">\n          <div class=\"form-group\">\n            <input type=\"text\" class=\"form-control\" placeholder=\"Search Problem\" [formControl]=\"searchBox\">\n          </div>\n        </form>\n\n        <ul class=\"nav navbar-nav navbar-right\">\n          <li *ngIf=\"!auth.isAuthenticated()\">\n            <form class=\"navbar-form navbar-right\" >\n              <button type = \"button\" class=\"btn\"  (click)=\"login()\">Sign in</button>\n            </form>\n          </li>\n          <li class=\"dropdown\" *ngIf=\"auth.isAuthenticated()\">\n            <!-- <li class=\"main-logo\"><img ng-src=\"{{profile?.picture}}\"></li> -->\n            <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">{{profile?.nickname}} <span class=\"caret\"></span></a>\n            <ul class=\"dropdown-menu\">\n              <li><a routerLink=\"/profile\">My Profile</a></li>\n              <li role=\"separator\" class=\"divider\"></li>\n              <li><a href=\"#\" (click)='logout()'>Log Out</a></li>\n              <li *ngIf=\"authGuard.isAdmin()\" role=\"separator\" class=\"divider\"></li>\n              <li *ngIf=\"authGuard.isAdmin()\"><a routerLink=\"/newproblems\">Add New Problems</a></li>\n            </ul>\n          </li>\n        </ul>\n\n      </div>\n      <!-- /.navbar-collapse -->\n    </div>\n    <!-- /.container-fluid -->\n  </nav>\n</div>\n"
 
 /***/ }),
 
@@ -629,42 +631,30 @@ var __param = (undefined && undefined.__param) || function (paramIndex, decorato
 
 //import { AuthService } from '../../services/auth.service';
 var NavbarComponent = /** @class */ (function () {
-    function NavbarComponent(auth, input, router) {
+    function NavbarComponent(auth, input, authGuard, router) {
+        var _this = this;
         this.auth = auth;
         this.input = input;
+        this.authGuard = authGuard;
         this.router = router;
         this.title = "Lets Code Togather!";
         this.sessionId = "";
         this.username = "";
         this.searchBox = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]();
+        this.auth.userProfile.subscribe(function (profile) { return _this.profile = profile; });
     }
     NavbarComponent.prototype.ngOnInit = function () {
-        // this.nicknameSub = this.auth.getNickName().subscribe( (nick:string)=>{
-        //   this.username=nick;
-        // });
         var _this = this;
         if (this.auth.isAuthenticated()) {
-            this.profile = this.auth.getProfile();
-            this.username = this.profile.nickname;
+            this.username = this.auth.getProfile().nickname;
         }
         this.subscription = this.searchBox
             .valueChanges
             .debounceTime(200)
             .subscribe(function (term) { _this.input.changeInput(term); });
     };
-    NavbarComponent.prototype.generateSessionId = function () {
-        this.sessionId = Math.random().toString(36).substring(2, 6) + Math.random().toString(36).substring(2, 6);
-        window.open("/board/" + this.sessionId);
-        // this.router.navigate([`/board/${this.sessionId}`]);
-    };
     NavbarComponent.prototype.login = function () {
-        var _this = this;
-        this.auth.login()
-            .then(function (p) {
-            _this.profile = p;
-            //console.log("p=" + p);
-            _this.username = _this.profile.user_metadata.nickname;
-        });
+        this.auth.login();
     };
     NavbarComponent.prototype.logout = function () {
         this.auth.logout();
@@ -677,7 +667,8 @@ var NavbarComponent = /** @class */ (function () {
         }),
         __param(0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])("auth")),
         __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])('input')),
-        __metadata("design:paramtypes", [Object, Object, _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        __param(2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])('authGuard')),
+        __metadata("design:paramtypes", [Object, Object, Object, _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], NavbarComponent);
     return NavbarComponent;
 }());
@@ -693,7 +684,7 @@ var NavbarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "#addform {\n\tmargin-bottom: 20px;\n}\n\n.ng-valid[required], .ng-valid.required  {\n  border-left: 5px solid #42A948; /* green */\n}\n\n.ng-invalid:not(form)  {\n  border-left: 5px solid #a94442; /* red */\n}\n\n.col-center-block {\n    float: none;\n    display: block;\n    margin-left: auto;\n    margin-right: auto;\n}\n"
 
 /***/ }),
 
@@ -704,7 +695,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"authGuard.isAdmin()\">\n  <form #formRef=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"problemName\">Problem Name</label>\n      <input type=\"text\" class=\"form-control\" id=\"problemName\"\n             name=\"problemName\" required placeholder=\"Enter Problem Name\" [(ngModel)]=\"newProblem.name\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"problemDesc\">Problem Description</label>\n      <textarea type=\"text\" row=\"3\" class=\"form-control\" id=\"problemDesc\"\n                name=\"problemDesc\" required placeholder=\"Enter Problem Description\" [(ngModel)]=\"newProblem.desc\"></textarea>\n    </div>\n    <div class=\"form-group\">\n      <label for=\"difficulty\">Difficulty</label>\n      <select class=\"form-control\" id=\"difficulty\"\n              name=\"difficulty\" [(ngModel)]=\"newProblem.difficulty\">\n        <option *ngFor=\"let difficulty of difficulties\" [value]=\"difficulty\">\n          {{ difficulty }}\n        </option>\n      </select>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <button type=\"submit\" class=\"btn btn-primary pull-right\" (click)=\"addProblem()\">Add Problem</button>\n      </div>\n    </div>\n  </form>\n</div>\n"
+module.exports = "<div id=\"addform\" *ngIf=\"authGuard.isAdmin()\">\n  <form #formRef=\"ngForm\">\n    <div class=\"form-group col-md-8 col-center-block\">\n      <label for=\"problemName\">Problem Name</label>\n      <input type=\"text\" class=\"form-control\" id=\"problemName\"\n             name=\"problemName\" required placeholder=\"Enter Problem Name\" [(ngModel)]=\"newProblem.name\">\n    </div>\n    <div class=\"form-group col-md-8 col-center-block\">\n      <label for=\"problemDesc\">Problem Description</label>\n      <textarea type=\"text\" row=\"3\" class=\"form-control\" id=\"problemDesc\"\n                name=\"problemDesc\" required placeholder=\"Enter Problem Description\" [(ngModel)]=\"newProblem.desc\"></textarea>\n    </div>\n    <div class=\"form-group col-md-8 col-center-block\">\n      <label for=\"difficulty\">Difficulty</label>\n      <select class=\"form-control\" id=\"difficulty\"\n              name=\"difficulty\" [(ngModel)]=\"newProblem.difficulty\">\n        <option *ngFor=\"let difficulty of difficulties\" [value]=\"difficulty\">\n          {{ difficulty }}\n        </option>\n      </select>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-md-10\">\n        <button type=\"submit\" class=\"btn btn-primary pull-right\" (click)=\"addProblem()\">Add Problem</button>\n      </div>\n    </div>\n  </form>\n</div>\n"
 
 /***/ }),
 
@@ -790,7 +781,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf='problem'>\n  <div class=\"col-xs-12 col-md-4\">\n    <div>\n      <h2>{{problem.id}}. {{problem.name}}</h2>\n      <p>{{problem.desc}}</p>\n      <br />\n    </div>\n  </div>\n  <div class=\"hidden-xs col-sm-12 col-md-8\">\n    <app-editor></app-editor>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\" *ngIf='problem'>\n  <div class=row>\n    <div class=\"col-xs-12 col-md-4\">\n    <div class=\"panel panel-primary\">\n\t\t  <div class=\"panel-heading\"><h4>{{problem.id}}. {{problem.name}}</h4></div>\n\t\t  <div class=\"panel-body\">{{problem.desc}}</div>\n\t\t</div>\n  </div>\n    <div class=\"hidden-xs col-sm-12 col-md-8\">\n      <app-editor></app-editor>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -866,7 +857,7 @@ module.exports = "body {\n  padding-top: 5rem;\n}\n\n.starter-template {\n  padd
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"starter-template\">\n    <h1>Collaborative Online Judge System</h1>\n    <p class=\"lead\">\n      This is a collaborative online judge system.<br>\n      You could edit the same problem with your teammates together.\n    </p>\n  </div>\n   <app-new-problem></app-new-problem>\n  <div class=\"list-group\">\n    <a class=\"list-group-item\" *ngFor=\"let problem of problems | search:searchTerm\" [routerLink]=\"['/problems', problem.id]\"\n    [routerLink]=\"['/problems', problem.id]\">\n      <span class=\"{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}\">\n        {{ toTitleCase(problem.difficulty) }}\n      </span>\n      <strong class=\"title\">\n        {{ problem.id }}. {{ toTitleCase(problem.name) }}\n      </strong>\n    </a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"starter-template\">\n    <h1>Collaborative Online Judge System</h1>\n    <p class=\"lead\">\n      This is a collaborative online judge system.<br>\n      You could edit the same problem with your teammates together.\n    </p>\n  </div>\n  <!-- <app-new-problem></app-new-problem> -->\n  <div class=\"list-group\">\n    <a class=\"list-group-item\" *ngFor=\"let problem of problems | search:searchTerm\" [routerLink]=\"['/problems', problem.id]\"\n    [routerLink]=\"['/problems', problem.id]\">\n      <span class=\"{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}\">\n        {{ toTitleCase(problem.difficulty) }}\n      </span>\n      <strong class=\"title\">\n        {{ problem.id }}. {{ toTitleCase(problem.name) }}\n      </strong>\n    </a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -956,7 +947,7 @@ module.exports = ".portrait {\n  height : 150px;\n}\n\n.profile-username {\n  te
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad\" >\n\n             <div class=\"panel panel-primary\">\n            <div class=\"panel-heading\">\n              <h3 class=\"panel-title\">My Profile</h3>\n            </div>\n            <div class=\"panel-body\">\n              <div class=\"row\">\n\n                <div class=\"col-md-3 col-lg-3 \" align=\"center\">\n\n                  <div id=pic>\n                    <img alt=\"User Pic\" src={{picUrl}} class=\"img-circle img-responsive\">\n                  </div>\n\n                  <div id=role>\n                    <div class=\"label label-danger\" *ngIf=\"this.role=='admin'\">Admin</div>\n                    <div class=\"label label-info\" *ngIf=\"this.role!='admin'\">Free User</div>\n                  </div>\n\n                </div>\n\n                <div class=\" col-md-9 col-lg-9 \">\n                  <table class=\"table table-user-information\">\n                    <tbody>\n                      <tr>\n                        <td>Nickname:</td>\n                        <td>{{nickname}}</td>\n                      </tr>\n\n                      <tr>\n                        <td>Full Name</td>\n                        <td>{{name}}</td>\n                      </tr>\n\n                      <tr>\n                        <td>E-mail</td>\n                        <td>{{email}}</td>\n                      </tr>\n\n\n\n                        <tr>\n                        <td>Since</td>\n                        <td>{{created}}</td>\n                        </tr>\n\n                        <tr>\n                        <td>Last Login</td>\n                        <td>{{lastlogin}}</td>\n                        </tr>\n\n                        <tr>\n                        <td>Email Verified</td>\n                        <td>\n                        <div class=\"label label-success\" *ngIf=\"this.verified\">Yes</div>\n                        <div class=\"label label-danger\" *ngIf=\"!this.verified\">No</div>\n                        </td>\n                        </tr>\n                    </tbody>\n                  </table>\n\n                  <button class=\"btn btn-primary pull-right\" data-toggle=\"modal\" data-target=\"#cpwd\">Change Password</button>\n                  <!-- Modal -->\n                      <div id=\"cpwd\" class=\"modal fade\" role=\"dialog\">\n                        <div class=\"modal-dialog\">\n\n                          <!-- Modal content-->\n                          <div class=\"modal-content\">\n                            <div class=\"modal-header\">\n                              <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n                              <h4 class=\"modal-title\">Change Password</h4>\n                            </div>\n                            <div class=\"modal-body\">\n                              <p>1. Go to login page</p>\n                              <p>2. Click \"Don't remember your password?\"</p>\n                              <p>3. Check your mailbox and reset password</p>\n                            </div>\n                            <div class=\"modal-footer\">\n                              <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Close</button>\n                            </div>\n                          </div>\n\n                        </div>\n                      </div>\n\n\n                </div>\n              </div>\n            </div>\n                 <div class=\"panel-footer\">\n                        <a type=\"button\" href=\"mailto:yenhsuac@usc.edu\" class=\"btn btn-primary\" class=\"btn btn-sm btn-primary\"><span class=\"glyphicon glyphicon-envelope\"></span> Contact Author</a>\n                        <span class=\"pull-right\">\n\n                            <button class=\"btn btn-sm btn-warning\" data-toggle=\"modal\" data-target=\"#cnick\"><i class=\"glyphicon glyphicon-edit\"></i> Update</button>\n\n                            <!-- Modal -->\n                            <div id=\"cnick\" class=\"modal fade\" role=\"dialog\">\n                              <div class=\"modal-dialog\">\n\n                                <!-- Modal content-->\n                                <div class=\"modal-content\">\n                                  <div class=\"modal-header\">\n                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n                                    <h4 class=\"modal-title\">Change Nickname</h4>\n                                  </div>\n                                  <div class=\"modal-body\">\n                                      <div class=\"form-group\">\n                                        <label for=\"usr\">New Nickname:</label>\n                                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"newNick\">\n                                      </div>\n                                  </div>\n                                  <div class=\"modal-footer\">\n                                    <button type=\"button\" class=\"btn btn-success\" (click)=\"updateInfo()\" data-dismiss=\"modal\">Submit</button>\n                                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n                                  </div>\n                                </div>\n\n                              </div>\n                            </div>\n                        </span>\n                  </div>\n          </div>\n        </div>\n      </div>\n    </div>\n"
+module.exports = "<div class=\"container\">\n  <ul class=\"nav nav-tabs\">\n    <li class=\"active\"><a data-toggle=\"tab\" href=\"#profile\">Profile</a></li>\n    <li><a data-toggle=\"tab\" href=\"#password\">Change Password</a></li>\n  </ul>\n\n  <hr>\n\n  <div class=\"tab-content\">\n    <div id=\"profile\" class=\"tab-pane fade in active\">\n      <h3>Profile</h3>\n\n      <div class=\"form-group\">\n        <label for=\"username\">Username</label>\n        <input type=\"text\" class=\"form-control\" id=\"username\" name=\"username\"\n        disabled value={{username}}>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"email\">Email</label>\n        <input type=\"text\" class=\"form-control\" id=\"email\" name=\"email\"\n        disabled value={{email}}>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"login\">Last Login</label>\n        <input type=\"text\" class=\"form-control\" id=\"login\" name=\"login\"\n        disabled value={{login_time}}>\n      </div>\n\n    </div>\n\n    <div id=\"password\" class=\"tab-pane fade\">\n      <h3>Change Password</h3>\n      <div class=\"nav-form\">\n        <button type=\"button\" class=\"btn btn-large btn-success\" (click)=\"resetPassword()\">Reset password via email</button>\n      </div>\n    </div>\n    <br>\n\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -984,42 +975,22 @@ var __param = (undefined && undefined.__param) || function (paramIndex, decorato
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 
+//import { AuthService } from '../../services/auth.service';
 var ProfileComponent = /** @class */ (function () {
     function ProfileComponent(auth) {
         this.auth = auth;
+        this.email = '';
+        this.username = '';
+        this.login_time = '';
     }
     ProfileComponent.prototype.ngOnInit = function () {
-        if (this.auth.authenticated()) {
-            this.readProfile();
-        }
-    };
-    ProfileComponent.prototype.readProfile = function () {
         this.profile = this.auth.getProfile();
-        console.log(this.profile);
-        this.nickname = this.profile.user_metadata.nickname;
-        this.newNick = this.nickname;
         this.email = this.profile.email;
-        this.picUrl = this.profile.picture;
-        this.created = this.profile.created_at.substring(0, 10);
-        this.lastlogin = this.profile.updated_at.substring(0, 10);
-        this.role = 'Free User';
-        if (this.profile.roles.length != 0) {
-            this.role = this.profile.roles[0];
-        }
-        this.name = this.profile.user_metadata.full_name;
-        this.verified = (this.profile.email_verified);
+        this.username = this.profile.nickname;
+        this.login_time = this.profile.updated_at;
     };
-    ProfileComponent.prototype.updateInfo = function () {
-        var _this = this;
-        var data = JSON.stringify({ user_metadata: { nickname: this.newNick, full_name: this.name } });
-        this.auth.updateInfo(data)
-            .then(function (p) {
-            var tmp = JSON.parse(p);
-            _this.profile.user_metadata.nickname = tmp['user_metadata'].nickname;
-            localStorage.setItem('profile', JSON.stringify(_this.profile));
-            _this.auth.sendNickName(tmp['user_metadata'].nickname);
-            _this.readProfile();
-        });
+    ProfileComponent.prototype.resetPassword = function () {
+        this.auth.resetPassword();
     };
     ProfileComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1027,7 +998,7 @@ var ProfileComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./profile.component.html */ "./src/app/components/profile/profile.component.html"),
             styles: [__webpack_require__(/*! ./profile.component.css */ "./src/app/components/profile/profile.component.css")]
         }),
-        __param(0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])('authV2')),
+        __param(0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])("auth")),
         __metadata("design:paramtypes", [Object])
     ], ProfileComponent);
     return ProfileComponent;
@@ -1115,7 +1086,9 @@ var AuthGuardService = /** @class */ (function () {
         }
     };
     AuthGuardService.prototype.isAdmin = function () {
-        if (this.auth.isAuthenticated() && this.auth.getProfile() != null) {
+        if (this.auth.isAuthenticated()
+            && this.auth.getProfile() != null
+            && this.auth.getProfile()['http://getRoles/roles'] != null) {
             if (this.auth.getProfile()['http://getRoles/roles'].includes('Admin')) {
                 return true;
             }
@@ -1130,143 +1103,6 @@ var AuthGuardService = /** @class */ (function () {
         __metadata("design:paramtypes", [Object, _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], AuthGuardService);
     return AuthGuardService;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/services/auth-v2.service.ts":
-/*!*********************************************!*\
-  !*** ./src/app/services/auth-v2.service.ts ***!
-  \*********************************************/
-/*! exports provided: AuthV2Service */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthV2Service", function() { return AuthV2Service; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var angular2_jwt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! angular2-jwt */ "./node_modules/angular2-jwt/angular2-jwt.js");
-/* harmony import */ var angular2_jwt__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(angular2_jwt__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var rxjs_Rx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/Rx */ "./node_modules/rxjs-compat/_esm5/Rx.js");
-/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-// Auth0 Setting
-var options = {
-    theme: {
-        logo: '../../assets/mylogo.png',
-        primaryColor: '#2b2b2b'
-    },
-    languageDictionary: {
-        title: "Log in"
-    },
-    rememberLastLogin: false,
-    popupOptions: { width: 30, height: 40, left: 30, top: 30 },
-    redirect: false,
-    auth: {
-        redirect: false,
-        sso: false,
-        responseType: 'token',
-        params: {
-            scope: 'openid'
-        },
-    },
-    additionalSignUpFields: [{
-            name: "nickname",
-            placeholder: "Enter your nickname"
-        },
-        {
-            name: "full_name",
-            placeholder: "Enter your full name"
-        }]
-};
-var AuthV2Service = /** @class */ (function () {
-    function AuthV2Service(router, http) {
-        this.router = router;
-        this.http = http;
-        // Configure Auth0
-        this.clientId = '8ISBVQwZmgTAz_FaNa_yT19ufKDN7bU4';
-        this.domain = 'horis.auth0.com';
-        this.lock = new Auth0Lock(this.clientId, this.domain, options);
-        this.nickname = new rxjs_Rx__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"]("");
-    }
-    AuthV2Service.prototype.login = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.lock.on("authenticated", function (authResult) {
-                _this.lock.getUserInfo(authResult.accessToken, function (error, profile) {
-                    if (error) {
-                        console.log(error);
-                        return;
-                    }
-                    localStorage.setItem('accessToken', authResult.accessToken);
-                    localStorage.setItem('id_token', authResult.idToken);
-                    localStorage.setItem('profile', JSON.stringify(profile));
-                    _this.profile = profile;
-                    //console.log('here');
-                    resolve(profile);
-                    //this.router.navigate(['/ugihuih']);
-                    setTimeout(function () { _this.lock.hide(); }, 1300);
-                });
-            });
-            _this.lock.show();
-        });
-    };
-    AuthV2Service.prototype.getNickName = function () {
-        return this.nickname.asObservable();
-    };
-    AuthV2Service.prototype.sendNickName = function (nick) {
-        this.nickname.next(nick);
-    };
-    AuthV2Service.prototype.isAuthenticated = function () {
-        // const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-        // return localStorage.getItem('profile') && new Date().getTime() < expiresAt;
-        return Object(angular2_jwt__WEBPACK_IMPORTED_MODULE_1__["tokenNotExpired"])('id_token');
-    };
-    AuthV2Service.prototype.logout = function () {
-        // Remove token from localStorage
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('profile');
-        //localStorage.removeItem('expires_at');
-        localStorage.removeItem('id_token');
-        this.router.navigate(['/']);
-    };
-    AuthV2Service.prototype.getProfile = function () {
-        return JSON.parse(localStorage.getItem('profile'));
-    };
-    AuthV2Service.prototype.updateInfo = function (info) {
-        var header = new _angular_http__WEBPACK_IMPORTED_MODULE_4__["Headers"]();
-        header.append('content-type', 'application/json');
-        header.append('Accept', 'application/json');
-        header.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-        var url = 'https://' + 'horis.auth0.com' + '/api/v2/users/' + this.getProfile()['user_id'];
-        //console.log(url);
-        return this.http.patch(url, info, { headers: header })
-            .toPromise()
-            .then(function (response) {
-            return response['_body'];
-        });
-    };
-    AuthV2Service = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_http__WEBPACK_IMPORTED_MODULE_4__["Http"]])
-    ], AuthV2Service);
-    return AuthV2Service;
 }());
 
 
@@ -1591,7 +1427,7 @@ var DataService = /** @class */ (function () {
             .toPromise()
             .then(function (res) {
             console.log(res);
-            return res;
+            return (res);
         })
             .catch(function (error) {
             return JSON.stringify(error);

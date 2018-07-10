@@ -1,16 +1,16 @@
-<div *ngIf="authGuard.isAdmin()">
+<div id="addform" *ngIf="authGuard.isAdmin()">
   <form #formRef="ngForm">
-    <div class="form-group">
+    <div class="form-group col-md-8 col-center-block">
       <label for="problemName">Problem Name</label>
       <input type="text" class="form-control" id="problemName"
              name="problemName" required placeholder="Enter Problem Name" [(ngModel)]="newProblem.name">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-8 col-center-block">
       <label for="problemDesc">Problem Description</label>
       <textarea type="text" row="3" class="form-control" id="problemDesc"
                 name="problemDesc" required placeholder="Enter Problem Description" [(ngModel)]="newProblem.desc"></textarea>
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-8 col-center-block">
       <label for="difficulty">Difficulty</label>
       <select class="form-control" id="difficulty"
               name="difficulty" [(ngModel)]="newProblem.difficulty">
@@ -20,7 +20,7 @@
       </select>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-10">
         <button type="submit" class="btn btn-primary pull-right" (click)="addProblem()">Add Problem</button>
       </div>
     </div>

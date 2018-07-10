@@ -16,7 +16,9 @@ export class AuthGuardService implements CanActivate {
   }
 
   isAdmin(): boolean {
-   if(this.auth.isAuthenticated()&& this.auth.getProfile() != null){
+   if(this.auth.isAuthenticated()
+    && this.auth.getProfile() != null
+    && this.auth.getProfile()['http://getRoles/roles'] != null){
     if(this.auth.getProfile()['http://getRoles/roles'].includes('Admin')){
           return true;
       }

@@ -1,12 +1,13 @@
 <div class="container" *ngIf='problem'>
-  <div class="col-xs-12 col-md-4">
-    <div>
-      <h2>{{problem.id}}. {{problem.name}}</h2>
-      <p>{{problem.desc}}</p>
-      <br />
-    </div>
+  <div class=row>
+    <div class="col-xs-12 col-md-4">
+    <div class="panel panel-primary">
+		  <div class="panel-heading"><h4>{{problem.id}}. {{problem.name}}</h4></div>
+		  <div class="panel-body">{{problem.desc}}</div>
+		</div>
   </div>
-  <div class="hidden-xs col-sm-12 col-md-8">
-    <app-editor></app-editor>
+    <div class="hidden-xs col-sm-12 col-md-8">
+      <app-editor></app-editor>
+    </div>
   </div>
 </div>

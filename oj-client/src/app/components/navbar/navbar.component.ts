@@ -7,7 +7,6 @@ import { Observable } from 'rxjs/internal/Observable';
 import 'rxjs/add/operator/debounceTime';
 
 //import { AuthService } from '../../services/auth.service';
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -20,27 +19,24 @@ export class NavbarComponent implements OnInit {
   profile: any;
   username = "" ;
   searchBox: FormControl = new FormControl();
-  nicknameSub:Subscription;
-  subscription:Subscription
+  subscription: Subscription;
 
 
 
 
   constructor(@Inject ("auth") private auth,
               @Inject('input') private  input,
-              private router: Router ) {}
+              @Inject('authGuard') private authGuard,
+              private router: Router ) {
+                this.auth.userProfile.subscribe(
+                  profile => this.profile = profile
+                );
+               }
 
   ngOnInit() {
-
-    // this.nicknameSub = this.auth.getNickName().subscribe( (nick:string)=>{
-    //   this.username=nick;
-    // });
-
     if(this.auth.isAuthenticated()){
-      this.profile=this.auth.getProfile();
-  	  this.username=this.profile.nickname;
+      this.username = this.auth.getProfile().nickname;
     }
-
     this.subscription = this.searchBox
                             .valueChanges
                             .debounceTime(200)
@@ -49,24 +45,12 @@ export class NavbarComponent implements OnInit {
                             );
   }
 
-  generateSessionId() {
-    this.sessionId = Math.random().toString(36).substring(2, 6) + Math.random().toString(36).substring(2, 6);
-    window.open(`/board/${this.sessionId}`);
-    // this.router.navigate([`/board/${this.sessionId}`]);
-  }
-
-
   login() {
-    this.auth.login()
-    .then(p=>{
-      this.profile=p;
-      //console.log("p=" + p);
-      this.username=this.profile.user_metadata.nickname;
-    });
+    this.auth.login();
+
   }
 
   logout() {
     this.auth.logout();
   }
-
 }
