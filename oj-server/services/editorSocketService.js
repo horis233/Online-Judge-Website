@@ -116,26 +116,36 @@ module.exports = function(io){
         });
         // When disconnect, save content in radis
         socket.on('disconnect', () => {
-            const sessionId = socketIdToSessionId[socket.id];
-            let foundAndRemove = false;
-            if (sessionId in collaborations) {
-                const participants = collaborations[sessionId]['participants'];
-                const index = participants.indexOf(socket.id);
-                if (index >= 0){
-                    participants.slice(index, 1);
-                    foundAndRemove = true;
-                    if (participants.length === 0){ //last user
-                        const key = sessionPath + '/' + sessionId;
-                        const value = JSON.stringify(collaborations[sessionId]['cachaedInstructions']);
-                        redisClient.set(key, value, redisClient.redisPrint);
-                        redisClient.expire(key, TIMEOUT_IN_SECONDS);
-                        delete collaboraitons[sessionId];
-                    }
-                }
-            }
-            if (!foundAndRemove) {
-                console.error('warning');
-            }
+          console.log(`socket:${socket.id} disconnected!`);
+
+    			if (sessionId in collaborations) {
+
+    				let users = collaborations[sessionId]['participants'];
+    				let idx = users.indexOf(socket.id);
+
+    				if (idx != -1) {
+    					users.splice(idx,1);
+    				}
+
+    				let usersInTheRoom = collaborations[sessionId]['participants'];
+    				for (let i=0; i<usersInTheRoom.length; i++) {
+
+    					console.log('SEND: USERS NUM');
+    					io.to(usersInTheRoom[i]).emit('userNum',""+usersInTheRoom.length);
+
+    				}
+
+    				if (users.length==0) {
+    					console.log('Contents were saved into Redis');
+    					let key = sessionPath+sessionId;
+    					let val = JSON.stringify(collaborations[sessionId]['cachaedInstructions']);
+
+    					redisClient.set(key,val,()=>{});
+    					redisClient.expire(key,TIMEOUT_IN_SECONDS);
+    					delete collaborations[sessionId];
+
+    				}
+    			}
         });
 
         function forwardEvents(socketId, eventName, dataString) {
