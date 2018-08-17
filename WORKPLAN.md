@@ -574,19 +574,6 @@ npm install --save font-awesome
 ```ts
 "../node_modules/font-awesome/css/font-awesome.css"
 ```
-
-- Add html
-```html
-<div class="container">
-  <div class="social-icons">
-   <ul class="list-inline">
-     <li><a href="mailto:weichien711@gmail.com?Subject=Visiter from your website" target="_blank"  ><i class="fa fa-envelope"></i></a></li>
-     <li><a href="https://github.com/WeiChienHsu" target="_blank"><i class="fa fa-github" ></i></a></li>
-     <li><a href="https://www.linkedin.com/in/weichien-hsu/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-   </ul>
- </div> <!-- /.social-icons -->
-</div>  
-```
 ***
 ***
 
@@ -2067,7 +2054,7 @@ To start docker when the system boots: sudo systemctl enable docker
 - Dockerfile
 ```
 FROM ubuntu:16.04
-MAINTAINER Kevin Hsu
+MAINTAINER Horis Hu
 RUN apt-get update
 RUN apt-get install -y openjdk-8-jdk
 RUN apt-get install -y python3
@@ -2075,9 +2062,9 @@ RUN apt-get install -y python3
 
 - Build Docker
 ```
-sudo docker build -t weichienhsu/coj_project
+sudo docker build -t horis233/coj-project
 docker login
-docker push weichienhsu/coj_project
+docker push horis233/coj-project
 ```
 
 - Docker Package
@@ -2125,7 +2112,7 @@ EXECUTE_COMMANDS = {
 - Create a file tmp to save current_dir
 ```py
 CURRENT_DIR = os.path.dirname(os.path.relpath(__file__))
-IMAGE_NAME = 'weichienhsu/coj_project'
+IMAGE_NAME = 'horis233/coj-project'
 client = docker.from_env()
 
 TEMP_BUILD_DIR = "%s/tmp/" % CURRENT_DIR
