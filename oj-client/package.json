@@ -25,7 +25,7 @@
     "angular-jwt": "^0.1.9",
     "angular2-jwt": "^0.2.3",
     "auth0-js": "^9.8.1",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.1.2",
     "core-js": "^2.5.7",
     "jquery": "^3.3.1",
     "rxjs": "^6.3.3",
