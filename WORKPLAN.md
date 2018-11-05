@@ -847,7 +847,7 @@ npm install mongoose --save
 - server.js
 ```ts
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://user:user@ds123976.mlab.com:23976/cs503-1705test');
+mongoose.connect('mongodb://horis233:horis233@ds241059.mlab.com:41059/horis-coj');
 ```
 
 ## Build up a Schema for frontend to read
@@ -880,19 +880,20 @@ module.exports = ProblemModel;
 - ProblemModel.find(condition, callback[err, data]) : no condition and callback first deal with error and reject or resolve(send back) the data
 
 ### getProblems
-- findOne({id: neameYouInput}, (err, problem))
+- findOne({id: neameYouInput}, (emongoose.connect('mongodb://horis233:horis233@ds241059.mlab.com:41059/horis-coj');
+rr, problem))
 ```js
-const getProblem = function(id){
-    return new Promise((resolve, reject) => {
-        ProblemModel.findOne({id: id}, (err, problem) => {
-            if (err) {
-                console.log("In the problem service get problem");
-                reject(err);
-            } else {
-                resolve(problem);
-            }
-        });
+const getProblems = function() {
+  return new Promise((resolve, reject) => {
+    ProblemModel.find( {}, function(err, problems) {
+      if (err) {
+        reject(err);
+      }
+      else {
+        resolve(problems);
+      }
     });
+  });
 }
 ```
 
@@ -944,7 +945,7 @@ const addProblem = function(newProblem){
 ### STEP 1  
 - Refactor client-side data.service to async
 - in app.module.ts
-- import HttpClientModule
+- import httpClientModule
 
 ### STEP 2
 - Refactor all components calling data.service
@@ -965,32 +966,31 @@ const addProblem = function(newProblem){
 ## Refactor client-side data.service
 
 - Call out DataService which used to connect with mock data
-- Http Module (in app.module)
+- http Module (in app.module)
 
 ```ts
-import { HttpClientModule } from '@angular/common/http';
+import { httpClientModule } from '@angular/common/http';
 
   imports: [
     BrowserModule,
     routing,
     FormsModule,
-    HttpClientModule
+    httpClientModule
   ],
 ```
-- Import HttpClient, HttpHeaders, HttpResponse:
+- Import httpClient, httpHeaders, httpResponse:
 
 - Observable: Observe Data Flow. Non-stop sending data, with Values, Complete, Error.
 
 - BehaviorSubject: Always exist.
 
-* [For more information about observables](https://www.zhihu.com/question/48615787)
 
 * [For more information about observables](https://stackoverflow.com/questions/39494058/behaviorsubject-vs-observable)
 
 
 ```ts
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { httpClient, httpHeaders, httpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/toPromise';
@@ -1005,9 +1005,9 @@ import 'rxjs/add/operator/toPromise';
 
 ```
 
-- Register Angular HttpClient
+- Register Angular httpClient
 ```ts
- constructor(private HttpClient: HttpClient) { }
+ constructor(private httpClient: httpClient) { }
 ```
 ### getProblems
 
@@ -1048,15 +1048,15 @@ import 'rxjs/add/operator/toPromise';
 
 ### addProblem
 
-- Since we need to send a POST request to API, we need to give a hearder first (Content-Type).
+- Since we need to send a POST request to API, we need to give a header first (Content-Type).
 
-- Post Request will send url+body+header and a callback function
+- Post Request will send URL+body+header and a callback function
 
-- Call getProblems: since frontend won't know the change of database when we add a problem so after we update problem list, we need to call back new problem list in frontend
+- Call getProblems: since front-end won't know the change of database when we add a problem so after we update problem list, we need to call back new problem list in front-end
 
 ```ts
   addProblem(problem: Problem) {
-      const options = { headers: new HttpHeaders({'Content-Type': 'application/json' })};
+      const options = { headers: new httpHeaders({'Content-Type': 'application/json' })};
       return this.httpClient.post('api/v1/problems', problem, options)
         .toPromise()
         .then((res: any) => {
@@ -1069,7 +1069,7 @@ import 'rxjs/add/operator/toPromise';
 
 
 
-## Change Problem-list.component from sync to async (同步 -> 異步) and add Subscription
+## Change Problem-list.component from sync to async and add Subscription
 
 - Import OnDestroy/Subscription
 - subcribe when OiInit, then when the problem data change, our frontend will know
@@ -1493,7 +1493,7 @@ module.exports = function(io){
 ```js
 io.to(socket.id).emit('message', 'hehe from server');
 ```
-- Build up a Http server in server.js
+- Build up a http server in server.js
 ```js
 const http = require('http');
 const socketIO = require('socket.io');
@@ -1536,7 +1536,7 @@ export class EditorComponent implements OnInit {
 
 
 ```
-- In ngOnInit, get id first by route params senging into "sessionId" and call initEditor (Make those methods a function)
+- In ngOnInit, get id first by route params sending into "sessionId" and call initEditor (Make those methods a function)
 
 - Send editor and session id when using clollaboration init
 
@@ -1610,7 +1610,7 @@ editor change{"start":{"row":6,"column":4},"end":{"row":6,"column":5},"action":"
 
 - save sessionId into socket.id (user)
 
-- if sessionId is the first one which means not in collaboration, creates a new collaboration oject with participants
+- if sessionId is the first one which means not in collaboration, creates a new collaboration object with participants
 
 - If the sessionId is in collaboration, add sockt.id into participants
 
@@ -1655,12 +1655,12 @@ module.exports = function(io){
 
 ## Store and restore socket session with Redis
 
-- collaboration service, when user
-- 從connection的時候就先去collaborations看有沒有這個sessionId
-- 如果 collaborations 裡面沒有， 要從Redis裡面拿（restoreBuffer)
-- 拿到 sessionId，到collections裡面看有沒有，如果沒有，直接說“沒有”
-- 如果有，直接到collections內拿記錄下來的"cachedInstructions:
-- 然後把 instrcutions裡面從頭到尾把所有變化讀取, [0] "change" [1] delta
+- collaboration service
+- first check the sessionId in collaborations;
+- if not in collaborations， check sessionId form Redis（restoreBuffer);
+- After getting sessionId，check the sessionId in collections, if there does not exist this sessionId, return false;
+- if there exists this sessionId, get cachedInstructions from collections;
+- execute instrcutions.
 
 ```ts
   restoreBuffer():void{
@@ -1794,7 +1794,7 @@ socket.on('change', delta => {
 - When Client side call restore Buffer, emit out all contents saved in redis
 - instruction[0] : change
 - instruction[1] : content
-- instruction 就是紀錄每一行的動作
+- instruction use for save changes
 ```js
 socket.on('restoreBuffer', () => {
     const sessionId = socketIdToSessionId[socket.id];
@@ -1886,7 +1886,7 @@ output: string = '';
 - Send usercode and language datas to Server side (by DataService)
 ```ts
 buildAndRun(data): Promise<any> {
-    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json'})};
+    const options = { headers: new httpHeaders({ 'Content-Type': 'application/json'})};
     return this.httpClient.post('api/v1/build_and_run', data, options)
       .toPromise()
       .then(res => {

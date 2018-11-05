@@ -20,7 +20,7 @@
 ***
 ## How a request was sent from frontend to backend and back to browser
 
-- DataService(FrontEnd) call a Http Request
+- DataService(FrontEnd) call a http Request
 - for example getProblems()
 - api Request send to server.js
 - Server.js send request to RestRouter to find a right ProblemService

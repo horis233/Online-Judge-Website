@@ -8,6 +8,7 @@ oj-client/dist/
 package-lock.json
 # dependencies
 node_modules/
+*.pyc
 
 # IDEs and editors
 /.idea
